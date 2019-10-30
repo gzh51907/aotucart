@@ -1,0 +1,6 @@
+{
+    "PORT":1907,
+    "DBurl":"mongodb://10.3.133.66:27017",
+    "DBname":"aotucar",
+    "secret":"see you later"
+}
