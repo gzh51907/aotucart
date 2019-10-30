@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 
 class Details extends Component {
-    rebder() {
+    render() {
         return (
             <div>
             Details/详情页

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 
 class CartOwner extends Component {
-    rebder() {
+    render() {
         return (
             <div>
             CartOwner/成为车主

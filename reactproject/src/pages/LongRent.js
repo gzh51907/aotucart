@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 
 class LongRent extends Component {
-    rebder() {
+    render() {
         return (
             <div>
             LongRent/长租

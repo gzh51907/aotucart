@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 
 class ShareCart extends Component {
-    rebder() {
+    render() {
         return (
             <div>
             ShareCart/共享车

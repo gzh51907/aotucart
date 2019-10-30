@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 
 class Reg extends Component {
-    rebder() {
+    render() {
         return (
             <div>
             Reg/注册

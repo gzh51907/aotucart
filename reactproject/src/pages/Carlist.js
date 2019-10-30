@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 
 
-class Cartlist extends Component {
-    rebder() {
+class Carlist extends Component {
+    render() {
         return (
             <div>
-            Cartlist/车
+            Carlist/车列表
         </div>
         )
     }
 }
 
-export default Cartlist;
+export default Carlist;

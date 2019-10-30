@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 
 class Login extends Component {
-    rebder() {
+    render() {
         return (
             <div>
             Login/登录
@@ -11,4 +11,4 @@ class Login extends Component {
     }
 }
 
-export default CartOwner;
+export default Login;
