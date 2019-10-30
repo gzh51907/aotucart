@@ -21,6 +21,7 @@ import Reg from './pages/Reg';
 
 
 @withRouter
+
 class App extends Component{
 
     
@@ -29,7 +30,7 @@ class App extends Component{
 
         return(
             <div>
-                2222        
+                       
 
 
             <Switch>
