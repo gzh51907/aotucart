@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 
 class Quick extends Component {
-    rebder() {
+    render() {
         return (
             <div>
             Quick/快捷租车

@@ -5,8 +5,8 @@ class Home extends Component {
     render() {
         return (
             <div>
-                Home/首页
-        </div>
+                Home/首页w
+            </div>
         )
     }
 }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 
 class Buffet extends Component {
-    rebder() {
+    render() {
         return (
             <div>
             Buffet/自助找车
