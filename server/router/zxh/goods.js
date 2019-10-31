@@ -62,13 +62,6 @@ router.get("/all",async(req,res)=>{
     res.send(formatData({data:result}))
 })
 
-//分页获取商品
-router.get('/page',async(req,res)=>{
-    let {collection,limit} = req.query
-    limit = Number(limit)
-    let result = await find(collection,{},{limit:limit})
-    res.send(formatData({data:result}))
-})
 
 //分页获取商品
 router.get('/pages',async(req,res)=>{
@@ -77,6 +70,67 @@ router.get('/pages',async(req,res)=>{
     skip = Number(skip)
     let result = await find('z_carlist',{},{limit:limit,skip:skip})
     res.send(formatData({data:result}))
+})
+
+//分页获取商品并且实现排序
+router.get('/pagesandsort',async(req,res)=>{
+    let {sort,limit,skip} = req.query
+    limit = Number(limit)
+    skip = Number(skip)
+    let result = await find('z_carlist',{},{sort:sort,asc:1,limit:limit,skip:skip})
+    res.send(formatData({data:result}))
+})
+
+
+//分页获取商品并且实现排序 价格升序
+router.get('/priceup',async(req,res)=>{
+    let {sort,limit,skip} = req.query
+    limit = Number(limit)
+    skip = Number(skip)
+    let result = await find('z_carlist',{},{sort:sort,asc:1,limit:limit,skip:skip})
+    res.send(formatData({data:result}))
+})
+
+//分页获取商品并且实现排序 价格降序
+router.get('/pricedown',async(req,res)=>{
+    let {sort,limit,skip} = req.query
+    limit = Number(limit)
+    skip = Number(skip)
+    let result = await find('z_carlist',{},{sort:sort,asc:0,limit:limit,skip:skip})
+    res.send(formatData({data:result}))
+})
+
+
+//分页获取商品并且实现排序 租次降序
+router.get('/zucidown',async(req,res)=>{
+    let {sort,limit,skip} = req.query
+    limit = Number(limit)
+    skip = Number(skip)
+    let result = await find('z_carlist',{},{sort:sort,asc:0,limit:limit,skip:skip})
+    res.send(formatData({data:result}))
+})
+
+//分页获取商品并且实现排序 距离降序
+router.get('/distance',async(req,res)=>{
+    let {sort,limit,skip} = req.query
+    limit = Number(limit)
+    skip = Number(skip)
+    let result = await find('z_carlist',{},{sort:sort,asc:0,limit:limit,skip:skip})
+    res.send(formatData({data:result}))
+})
+
+
+
+
+
+
+
+
+//根据条件对商品进行排序(升序) 
+router.get('/carup',async(req,res)=>{
+    let {sort} = req.query
+    let result = await find("z_carlist",{sort:sort,asc:1})
+    res.send(result)
 })
 
 

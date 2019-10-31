@@ -9,11 +9,12 @@ import {get} from '../../Api'
 
 
 
-class Loading extends Component {
+
 
    
-
-    render() {
+function Loading() {
+    
+    
         
         return (
             <div>
@@ -24,7 +25,10 @@ class Loading extends Component {
                </Row>
             </div>
         )
-    }
+    
+
 }
+    
+
 
 export default Loading;

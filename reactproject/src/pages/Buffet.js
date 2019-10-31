@@ -13,19 +13,33 @@ class Buffet extends Component {
         carlist:[],
         total:190,
         pause:false,
-        show:false
+        show:false,
+        sort:'none',
+        color:'#e9e9e9',
+        paixu:'综合排序',
+        type:'zonghe'
     }
 
     // car=[]
 
     async componentDidMount(){
-        let {total} = this.state
-        let data = await this.layLoad(10,0)
-        // console.log(data)
-        this.setState({
-            ...this.state,
-            carlist:data,
-        })
+        let {total,type} = this.state
+        if(type=='zonghe'){
+            let data = await this.layLoad(10,0)
+            // console.log(data)
+            this.setState({
+                ...this.state,
+                carlist:data,
+            })
+        }else{
+            let data = await this.layLoad(60,0)
+            // console.log(data)
+            this.setState({
+                ...this.state,
+                carlist:data,
+            })
+        }
+        
 
        
         //添加滚动条事件
@@ -38,14 +52,16 @@ class Buffet extends Component {
         }
 
     }
-    
+
+
+
     onScroll = ()=>{
         let {total,show} = this.state
         let { clientHeight, scrollHeight, scrollTop } = this.scrollDom;
         scrollTop = Math.ceil(scrollTop)
         const isBottom = clientHeight + scrollTop === scrollHeight;
         console.log(clientHeight, scrollHeight, scrollTop, isBottom);
-        let i =0
+        let i =30
         if(isBottom==true){
             console.log('到底了')
             if(i<=total){
@@ -53,66 +69,156 @@ class Buffet extends Component {
                     show:true
                 })
                 setTimeout(async () => {
-                    let data = await this.layLoad(10,i+10)
+                    let data = await this.layLoad(30,i+30)
                     // console.log(33333,data,i)
                     
-                    i+=10
+                    
                     this.setState({
                         carlist:this.state.carlist.concat(data),
                     },()=>{
-                        // console.log(55555,this.state.carlist)
+                        i+=30
                     }) 
                 }, 2000);
-               
             }
-
-              
         }
-
     }
 
-    async layLoad(limit=10,skip=0){
-        let {data:{data}} = await get('/hui/goods/pages',{
-            params:{
-                limit,
-                skip
-            }
+    
+
+    goto=(path)=>{
+        this.props.history.push(path)
+    }
+
+    onSort = ()=>{
+        console.log(this.sort)
+        // this.sort.style.display="block"
+        this.setState({
+            sort:'block',
+            
+        },()=>{
+            // console.log(this.state.sort)
         })
-        return data
+    }
+
+
+     sortBtn = async (paixu,type)=>{
+        this.setState({
+            color:'#58bc58',
+            paixu,
+            type
+        },async ()=>{
+            let data = await this.layLoad(60,0)
+            this.setState({
+                carlist:data
+            })
+        })
+        setTimeout(() => {
+            this.setState({
+                sort:'none'
+            },()=>{
+                // console.log(this.state.sort)
+            })
+        }, 1000);
+        console.log(type)
+        // let {data} = await 
+        
+    }
+ 
+
+
+    async layLoad(limit=10,skip=0){
+
+        if(this.state.type=='priceup'){
+            let {data:{data}} = await get('/hui/goods/priceup',{
+                params:{
+                    sort:"dayPrice",
+                    limit,
+                    skip
+                }
+            })
+            return data
+        }else if(this.state.type=='pricedown'){
+            let {data:{data}} = await get('/hui/goods/pricedown',{
+                params:{
+                    sort:"dayPrice",
+                    limit,
+                    skip
+                }
+            })
+            console.log('22222')
+            return data
+
+        }else if(this.state.type=='zuce'){
+            console.log(777777777)
+            let {data:{data}} = await get('/hui/goods/zucidown',{
+                params:{
+                    sort:"transCount",
+                    limit,
+                    skip
+                }
+            })
+            return data
+        }else if(this.state.type=='distance'){
+            let {data:{data}} = await get('/hui/goods/distance',{
+                params:{
+                    sort:"distance",
+                    limit,
+                    skip
+                }
+            })
+            return data
+        }else if(this.state.type=='zonghe'){
+            console.log(8888)
+            let {data:{data}} = await get('/hui/goods/pages',{
+                params:{
+                    limit,
+                    skip
+                }
+            })
+            return data
+        }
+
+        
     }
 
 
     render() {
-        let {carlist,show} = this.state
+        let {carlist,show,sort,paixu} = this.state
         // console.log(222,carlist)
         return (
             <div className="box" style={{height:"100%",background:"#e9e9e9",overflow:"auto"}} ref={e=>(this.scrollDom = e)}>
                 <Row className="title" type="flex" align="middle">
                     <Col span={3}>
-                        <Icon type="left"></Icon>
+                        <Icon type="left" onClick={this.goto.bind(this,'/home')}></Icon>
                     </Col>
                     <Col span={18}>
                         自助找车
                     </Col>
                     <Col span={3}>
-                        <Icon type="home"></Icon>
+                        <Icon type="home" onClick={this.goto.bind(this,'/home')}></Icon>
                     </Col>
                 </Row>
                 <div className="top">
-                    <Row className="top-header">
-                        <Col span={24}></Col>
-                        <Col span={24}></Col>
-                    </Row>
+                     
                 </div>
                 <div className="main">
                     <div className="content-top">
-                        <Row style={{height:45,borderBottom:"1px #999 solid"}}>
-                            <Col span={6} style={{height:45,lineHeight:"45px"}}></Col>
-                            <Col span={6} style={{height:45,lineHeight:"45px"}}></Col>
-                            <Col span={6} style={{height:45,lineHeight:"45px"}}></Col>
-                            <Col span={6} style={{height:45,lineHeight:"45px"}}></Col>
+                        <Row style={{height:45,borderBottom:"1px #e9e9e9 solid"}}className="c-top">
+                            <Col span={6} style={{height:45,lineHeight:"45px",color:"#58bc58"}} onClick={this.onSort.bind(this)} >{paixu}<Icon type='caret-down' style={{color:'#999'}}></Icon></Col>
+                            <Col span={6} style={{height:45,lineHeight:"45px"}}>区域<Icon type='caret-down' style={{color:'#999'}}></Icon></Col>
+                            <Col span={6} style={{height:45,lineHeight:"45px"}}>租金<Icon type='caret-down' style={{color:'#999'}}></Icon></Col>
+                            <Col span={6} style={{height:45,lineHeight:"45px"}}>品牌<Icon type='caret-down' style={{color:'#999'}}></Icon></Col>
+                            <Col className="sort" span={24} style={{display:sort}}>
+                                <Row ref={e=>(this.sort = e)} >
+                                    <Col onClick={this.sortBtn.bind(this,'综合排序',"zonghe")}>综合排序</Col>
+                                    <Col onClick={this.sortBtn.bind(this,"价格最低","priceup")}>价格最低</Col>
+                                    <Col onClick={this.sortBtn.bind(this,"价格最高","pricedown")}>价格最高</Col>
+                                    <Col onClick={this.sortBtn.bind(this,"距离最近","distance")}>距离最近</Col>
+                                    <Col onClick={this.sortBtn.bind(this,"租次最多","zuce")}>租次最多</Col>
+                                </Row>
+                            </Col>
                         </Row>
-                        <Row style={{height:60}}></Row>
+                        <Row style={{height:50}}></Row>
                     </div>
                     <Row className="banner"><img src="../imgs/zizhubanner.jpg"/></Row>
                     <Row className="content">
@@ -123,7 +229,7 @@ class Buffet extends Component {
                                         <img src={`https://carphoto.atzuche.com/`+item.coverPic} style={{width:150,height:100}}/>
                                         <div className="cars-right">
                                             <h4 className="car-name">{item.brand}</h4>
-                                            <p className="car-info"><span>{item.plateNum}</span><em>{item.distance}</em></p>
+                                            <p className="car-info"><span>{item.plateNum}</span><em>{item.distance+'km'}</em></p>
                                             <p className="car-point">{item.carScore + '分'}<em>{item.evalTagList?item.evalTagList[0]:''}</em></p>
                                             <p className="car-price"><span>{'￥'+item.dayPrice+'天'}</span><em>已租{item.transCount}次</em></p>
                                         </div>

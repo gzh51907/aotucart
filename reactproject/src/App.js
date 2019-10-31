@@ -20,6 +20,7 @@ import Carlist from './pages/Carlist';
 import Quick from './pages/Quick';
 import Login from './pages/Login';
 import Reg from './pages/Reg';
+import Test from './pages/Test';
 
 
 @withRouter
@@ -42,6 +43,7 @@ class App extends Component{
                 <Route path="/carlist" component={Carlist} />
                 <Route path="/buffet" component={Buffet} />
                 <Route path="/quick" component={Quick} />
+                <Route path="/test" component={Test} />
                 <Redirect from="/" to="/home" exact />
                 <Route render={() => <div><h1>404</h1>页面不存在</div>} />
             </Switch>
