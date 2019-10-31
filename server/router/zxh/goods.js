@@ -72,10 +72,10 @@ router.get('/page',async(req,res)=>{
 
 //分页获取商品
 router.get('/pages',async(req,res)=>{
-    let {collection,limit,skip} = req.query
+    let {limit,skip} = req.query
     limit = Number(limit)
     skip = Number(skip)
-    let result = await find(collection,{},{limit:limit,skip:skip})
+    let result = await find('z_carlist',{},{limit:limit,skip:skip})
     res.send(formatData({data:result}))
 })
 

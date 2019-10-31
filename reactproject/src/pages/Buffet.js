@@ -1,33 +1,92 @@
 import React, { Component } from 'react';
 import { Carousel,Row,Col ,Icon,Menu, Dropdown, message} from 'antd';
 
-
 import '../css/buffet.css'
 import {get} from '../Api'
+import Loadding from './buffet/loading'
+
+
+
 class Buffet extends Component {
 
     state = {
-        carlist:[]
+        carlist:[],
+        total:190,
+        pause:false,
+        show:false
     }
 
-    
+    // car=[]
 
     async componentDidMount(){
-        let {data:{data}} = await get('/goods/all',{
-            params:{collection:"z_carlist"}
-        })
+        let {total} = this.state
+        let data = await this.layLoad(10,0)
         // console.log(data)
         this.setState({
-            carlist:data
+            ...this.state,
+            carlist:data,
         })
+
+       
+        //添加滚动条事件
+        if(this.scrollDom){
+            this.scrollDom.addEventListener('scroll',()=>{
+                
+                this.onScroll(this)
+                // console.log('滚')
+            })
+        }
+
+    }
+    
+    onScroll = ()=>{
+        let {total,show} = this.state
+        let { clientHeight, scrollHeight, scrollTop } = this.scrollDom;
+        scrollTop = Math.ceil(scrollTop)
+        const isBottom = clientHeight + scrollTop === scrollHeight;
+        console.log(clientHeight, scrollHeight, scrollTop, isBottom);
+        let i =0
+        if(isBottom==true){
+            console.log('到底了')
+            if(i<=total){
+                this.setState({
+                    show:true
+                })
+                setTimeout(async () => {
+                    let data = await this.layLoad(10,i+10)
+                    // console.log(33333,data,i)
+                    
+                    i+=10
+                    this.setState({
+                        carlist:this.state.carlist.concat(data),
+                    },()=>{
+                        // console.log(55555,this.state.carlist)
+                    }) 
+                }, 2000);
+               
+            }
+
+              
+        }
+
+    }
+
+    async layLoad(limit=10,skip=0){
+        let {data:{data}} = await get('/hui/goods/pages',{
+            params:{
+                limit,
+                skip
+            }
+        })
+        return data
     }
 
 
     render() {
-        let {carlist} = this.state
-        console.log(222,carlist)
+        let {carlist,show} = this.state
+        // console.log(222,carlist)
         return (
-            <div className="box" style={{height:"100%",background:"#e9e9e9",overflow:"auto"}}>
+            <div className="box" style={{height:"100%",background:"#e9e9e9",overflow:"auto"}} ref={e=>(this.scrollDom = e)}>
                 <Row className="title" type="flex" align="middle">
                     <Col span={3}>
                         <Icon type="left"></Icon>
@@ -58,9 +117,9 @@ class Buffet extends Component {
                     <Row className="banner"><img src="../imgs/zizhubanner.jpg"/></Row>
                     <Row className="content">
                         {
-                            carlist.map(item=>{
+                            carlist.map((item,i)=>{
                                 
-                                return <Col className="cars" style={{marginBottom:"10px"}} key={item._id}>
+                                return <Col className="cars" style={{marginBottom:"10px"}} key={i}>
                                         <img src={`https://carphoto.atzuche.com/`+item.coverPic} style={{width:150,height:100}}/>
                                         <div className="cars-right">
                                             <h4 className="car-name">{item.brand}</h4>
@@ -72,16 +131,11 @@ class Buffet extends Component {
                                 
                             })
                         }
-                        {/* <Col className="cars" style={{marginBottom:"10px"}}>
-                            <img src="../imgs/zizhubanner.jpg" style={{width:150,height:100}}/>
-                            <div className="cars-right">
-                                <h4 className="car-name">蔚来 蔚然锦和</h4>
-                                <p className="car-info"><span>鱼A****11</span><em>7.4KM</em></p>
-                                <p className="car-point">5.0分<em>驾驶舒适</em></p>
-                                <p className="car-price"><span>￥500/天</span><em>已租22次</em></p>
-                            </div>
-                        </Col> */}
+                    
                     </Row>
+                    {   //懒加载--》加载中
+                        show?<Loadding></Loadding>:<></>
+                    }
                     
                 </div>
             </div>

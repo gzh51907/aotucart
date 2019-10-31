@@ -3,14 +3,17 @@ import { Row ,Col ,Icon,Tabs, Select } from 'antd';
 
 // import '../css/buffet.css'
 import {get} from '../../Api'
+//hoc
+// import {test} from '../../hoc'
+
+
 
 const { TabPane } = Tabs;
 
-
-
+// @test
 
 class Category extends Component {
-
+    
     state = {
         tabPosition: 'left',
         tab:[],
@@ -45,8 +48,9 @@ class Category extends Component {
             list:data.packageList
 
         },()=>{
-            console.log('tab:',this.state.tab)
-            console.log('list:',this.state.list)
+            // console.log('tab:',this.state.tab)
+            // console.log('list:',this.state.list)
+            // console.log('hoc:',this.props)
         })
     }   
 
@@ -69,7 +73,7 @@ class Category extends Component {
                                             
                                         }
                                         <Col>
-                                            <h4>title</h4>
+                                            <h4>{item.carPackageTypeText}</h4>
                                         </Col>
                                     </Row>
                                 </TabPane>
