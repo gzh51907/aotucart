@@ -2,11 +2,11 @@ const express = require('express')
 
 const router = express.Router()
 
-let {mongo} = require('../db')
+let {mongo} = require('../../db')
 
-let {find,create,update,remove} = require('../db/mongo')
+let {find,create,update,remove} = require('../../db/mongo')
 
-let {formatData} = require('../tools')
+let {formatData} = require('../../tools')
 //爬取并修写入改图片路径所需模块
 const fs = require('fs');
 const path = require('path');

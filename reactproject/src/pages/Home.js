@@ -8,7 +8,7 @@ class Home extends Component {
         // let {data} = await get("goods/all",{
         //     params:{collection:'y_banner'}
         // })
-        console.log(data)
+        // console.log(data)
     }
 
 

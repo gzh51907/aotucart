@@ -4,10 +4,16 @@ const router = express.Router();
 
 const {formatData,token} = require('../tools')
 
+//公用
 let goodsRouter = require('./goods')
-
-
 // let loginRouter = require('./login')
+
+
+//灰
+let huiGoodsRouter = require('./zxh/goods')
+let huiUserRouter = require('./zxh/user')
+
+
 
 //允许跨域请求
 router.use((req,res,next)=>{
@@ -25,8 +31,12 @@ router.use((req,res,next)=>{
 })
 
 router.use(express.urlencoded({extended:true}),express.json());//推导：内部自动调用next
-
+//公用
 router.use('/goods',goodsRouter)
+
+//灰
+router.use('/hui/goods',huiGoodsRouter)
+router.use('/hui/user',huiUserRouter)
 
 
 // router.use('/login',loginRouter)
