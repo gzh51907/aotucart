@@ -1,0 +1,45 @@
+.ant-input-affix-wrapper .ant-input:focus {
+    border: none;
+    border-bottom: 1px solid white !important;
+    box-shadow: none;
+}
+
+.ant-input-group-addon,
+.ant-input {
+    background: none;
+    outline: none;
+    border: none;
+}
+
+.ant-input:hover {
+    border-color: #fff;
+    border-right-width: 1px !important;
+}
+
+.ant-btn-block {
+    background: #0b5;
+    color: #fff;
+    border: 1px solid #0b5;
+}
+
+
+.ant-btn-primary:hover,
+.ant-btn-primary:focus {
+    background: #0b5;
+    color: #fff;
+    border: 1px solid #0b5;
+}
+
+.city-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-left: 15px;
+
+}
+
+.city-list li {
+    width: 20%;
+    height: 35px;
+}

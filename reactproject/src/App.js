@@ -1,7 +1,11 @@
-import React, { Component } from 'react';
+import React, {
+    Component
+} from 'react';
 import Api from './Api';
-import { connect } from 'react-redux';
-
+import {
+    connect
+} from 'react-redux';
+import './App.css';
 import {
     HashRouter,
     BrowserRouter,
@@ -17,30 +21,31 @@ import Home from './pages/Home';
 import Buffet from './pages/Buffet';
 import Carlist from './pages/Carlist';
 import Login from './pages/Login';
-import Reg from './pages/Reg';
-
+import UserCenter from './pages/UserCenter.jsx';
+import CityChoose from './pages/CityChoose.jsx';
+import Search from './pages/Search.jsx';
+import CarOwner from './pages/CarOwner.js';
 
 @withRouter
 class App extends Component {
 
-
-
     render() {
 
-        return (
-            <div>
-                2222
+        return (<div>
 
+            <Switch >
+                <Route path="/home" component={Home} />
+                <Route path="/citychoose" component={CityChoose} />
+                <Route path="/carowner" component={CarOwner} />
+                <Route path="/search" component={Search} />
+                <Route path="/userCenter" component={UserCenter} />
+                <Route path="/login" component={Login} />
+                <Route path="/carlist" component={Carlist} />
+                <Redirect from="/" to="/home" exact />
+                <Route render={() => <div> <h1> 404 </h1>页面不存在</div>} />
+            </Switch>
 
-            <Switch>
-                    <Route path="/home" component={Home} />
-                    <Route path="/reg" component={Reg} />
-                    <Route path="/login" component={Login} />
-                    <Route path="/carlist" component={Carlist} />
-                    <Redirect from="/" to="/home" exact />
-                    <Route render={() => <div><h1>404</h1>页面不存在</div>} />
-                </Switch>
-            </div>
+        </div>
         )
     }
 }

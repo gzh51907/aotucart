@@ -1,0 +1,103 @@
+ul,
+li {
+  list-style: none;
+}
+ul {
+  padding-inline-start: 0px;
+}
+.home-top {
+  height: 175px;
+  width: 100%;
+  padding: 5px 20px;
+  background: url(https://m.atzuche.com/m/index/img/header-img.cdcb67a.png) 0
+    bottom no-repeat;
+  background-size: cover;
+  position: relative;
+  margin-bottom: 15px;
+}
+.ant-row-flex {
+  height: 55px;
+  line-height: 55px;
+}
+.ant-input-affix-wrapper {
+  height: 45px;
+  width: 335px;
+  margin-left: 20px;
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+}
+.icon-list {
+  height: 93px;
+  width: 355px;
+  margin: 0px 10px;
+  position: relative;
+}
+.icon-list .icon-item {
+  width: 355;
+  height: 73px;
+  display: flex;
+  -webkit-box-pack: start;
+  justify-content: flex-start;
+}
+.icon-list .icon-item .item {
+  display: flex;
+  width: 71px;
+  justify-content: flex-start;
+  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+}
+.icon-list .icon-item .item img {
+  height: 50px;
+  width: 50px;
+  margin-bottom: 10px;
+  border-radius: 50%;
+}
+.icon-list .icon-item .item p {
+  display: block;
+  color: #333;
+  text-align: center;
+  font-size: 13px;
+  line-height: 1;
+  margin-bottom: 0;
+}
+.icon-list .ant-carousel .slick-dots li {
+  width: 3px;
+  height: 3px;
+  opacity: 0.5;
+  background: #1acc32;
+}
+.icon-list .ant-carousel .slick-dots .slick-active {
+  width: 9px;
+  height: 3px;
+  opacity: 1;
+  border-radius: 1.5px;
+}
+p {
+  margin-bottom: 0;
+}
+.icon-list .ant-carousel .slick-dots-bottom {
+  bottom: -10px;
+}
+.car-list {
+  padding: 0px 20px;
+  margin-top: 20px;
+}
+.car-list .ant-row-flex {
+  height: 30px;
+  line-height: 30px;
+}
+.car-list ul {
+  height: 212px;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+.car-list ul ::-webkit-scrollbar {
+  display: none;
+}
+.car-list ul li {
+  margin-right: 10px;
+}
