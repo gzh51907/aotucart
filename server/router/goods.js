@@ -25,6 +25,16 @@ router.post("/update", async (req, res) => {
   res.send(formatData({ data: data }));
 });
 
+//guoqing
+router.post("/addsubscribe", async (req, res) => {
+      let { car,city, phone, name, purpose } = req.body;
+    
+      let result = await create("q_subscribe", [{ car, city, phone, name, purpose }]);
+    
+      res.send(formatData({ data: result }));
+    });
+
+
 // router.post('/update',async(req,res)=>{
 //     let data = await find('user',{})
 //     data.forEach((item,i)=>{

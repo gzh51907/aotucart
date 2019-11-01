@@ -1,0 +1,15 @@
+h2{
+    text-align: center;
+    height:60px;
+    line-height: 60px;
+    padding:0 15px;
+    position: relative;
+    margin:0;
+}
+.anticon{
+    float:left;
+    position: absolute;
+    top: 50%;
+    left:25px;
+    transform:translate(0,-50%);
+}

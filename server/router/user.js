@@ -8,11 +8,12 @@ let {find,create,update,remove} = require('../db/mongo')
 
 let {formatData,token} = require('../tools')
 
+let colname = 'y_user'
 
 //获取所有用户数据
 router.get('/all',async(req,res)=>{
     
-    let result = await find('user',{})
+    let result = await find(colname,{})
     res.send(formatData({data:result}))
 })
 
@@ -22,7 +23,7 @@ router.get('/all',async(req,res)=>{
 //获取数据并查询数据库是否存在数据---->如果用户名已经存在  返回结果 {code:0,msg:"fail,data:查询结果（json字符串）},"
 router.get('/check',async(req,res)=>{
     let {username} = req.query
-    let result = await find('user',{username:username})
+    let result = await find(colname,{username:username})
     
     if(result.length!=0){
         res.send(formatData({code:0,data:result}))
@@ -30,6 +31,20 @@ router.get('/check',async(req,res)=>{
     
     res.send(formatData({data:result}))
 })
+
+
+// router.get('/phone',async(req,res)=>{
+//     let {username} = req.query
+    
+//     let result = await find(colname,{username:username})
+    
+//     if(result.length!=0){
+//         res.send(formatData({code:0,data:result}))
+//     }
+    
+//     res.send(formatData({data:result}))
+// })
+
 
 //获取数据并查询数据库是否存在数据---->如果用户名已经存在  返回结果 {code:0,msg:"fail,data:查询结果（json字符串）},"-->后台管理员
 router.get('/managecheck',async(req,res)=>{
@@ -45,31 +60,50 @@ router.get('/managecheck',async(req,res)=>{
 
 
 //插入用户信息 
-router.post('/reg',async(req,res)=>{
+// router.post('/reg',async(req,res)=>{
     
-    let {username,password,email} = req.body
-    let data = await find('user',{username:username})
+    // let {username,password,email} = req.body
+    // let data = await find(colname,{username:username})
+
+//     // res.send(data)
+//     let result
+//     let msg
+//     if(data.length !=0){
+//         result=[]
+//         msg="用户名已经存在"
+//     }else{
+//     let {username,password,email} = req.body
+//         result = await create(colname,[{username:username,password:password,username2:"绿军人浩克",email:email}])
+//         msg="插入成功"
+//     }
+//     res.send({msg:msg,data:result})
     
-    // res.send(data)
+// })
+
+router.post('/reg',async (req,res)=>{
+    let {username,password} = req.body;
+    // let {username,password,email} = req.body
+    let data = await find(colname,{username:username})
     let result
-    let msg
     if(data.length !=0){
         result=[]
         msg="用户名已经存在"
+        res.send({msg:msg,data:result})
     }else{
-    let {username,password,email} = req.body
-        result = await create("user",[{username:username,password:password,username2:"绿军人浩克",email:email}])
+        result = await create('y_user',[{username,password,username2:"绿巨人浩克",regtime:new Date().toLocaleString()}]);
         msg="插入成功"
+
+        res.send({msg:msg,data:result})
     }
-    res.send({msg:msg,data:result})
     
+
 })
 
 //修改用户信息
 router.post('/change',async(req,res)=>{
     // let data = await find('goodslist_all',{})
     let {username,email,password,username2,phone,price} = req.body
-    let result = update('user',{username:username},{price:price,email:email,password:password,username2:username2,phone:phone})
+    let result = update(colname,{username:username},{price:price,email:email,password:password,username2:username2,phone:phone})
     // let result = await update('goodslist_all',{},{kucun:randomNum})
     res.send(formatData({data:result}))
 })
@@ -78,7 +112,7 @@ router.post('/change',async(req,res)=>{
 router.post('/backreg',async(req,res)=>{
     
     let {username,password,phone,email,username2} = req.body
-    let data = await find('user',{username:username})
+    let data = await find(colname,{username:username})
     
     // res.send(data)
     let result
@@ -87,7 +121,7 @@ router.post('/backreg',async(req,res)=>{
         result=[]
         msg="用户名已经存在"
     }else{
-        result = await create("user",[{username:username,password:password,phone:phone,email:email,username2:username2}])
+        result = await create(colname,[{username:username,password:password,phone:phone,email:email,username2:username2}])
         msg="插入成功"
     }
     res.send({msg:msg,data:result})
@@ -118,7 +152,7 @@ router.post('/managereg',async(req,res)=>{
 // router.post('/login',async(req,res)=>{
 
 //     let {username,password} = req.body
-//     let result = await find('user',{username:username})
+//     let result = await find(colname,{username:username})
 //     result = result[0]
 //     if(result.length == 0){
 //         res.send('该用户名不存在')
@@ -158,7 +192,7 @@ router.get('/login',async (req,res)=>{
 router.get('/loginin',async (req,res)=>{
     let {username,password,mdl} = req.query;
 
-    let result = await mongo.find('user',{username,password});
+    let result = await mongo.find(colname,{username,password});
 
     
 
@@ -177,7 +211,7 @@ router.get('/loginin',async (req,res)=>{
 
 //用户修改
 router.post('/update',async(req,res)=>{
-    let result = await update('user',{username:"zhouxiaohuigg"},{email:"钢铁侠"})
+    let result = await update(colname,{username:"zhouxiaohuigg"},{email:"钢铁侠"})
     res.send(formatData({data:result}))
 })
 
@@ -185,7 +219,7 @@ router.post('/update',async(req,res)=>{
 //后台删除用户
 router.post('/delback',async(req,res)=>{
     let {username} = req.body
-    let result = await remove('user',{username:username})
+    let result = await remove(colname,{username:username})
     res.send(formatData({data:result}))
 })
 
@@ -193,7 +227,7 @@ router.post('/delback',async(req,res)=>{
 //增加用户属性
 router.post('/put',async(req,res)=>{
     
-    let result = await update('user',{username:"zhouxiaohui"},{username2:"羊城通丢了"})
+    let result = await update(colname,{username:"zhouxiaohui"},{username2:"羊城通丢了"})
     res.send(formatData({data:result}))
 })
 
