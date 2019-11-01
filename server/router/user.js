@@ -32,6 +32,20 @@ router.get('/check',async(req,res)=>{
     res.send(formatData({data:result}))
 })
 
+
+// router.get('/phone',async(req,res)=>{
+//     let {username} = req.query
+    
+//     let result = await find(colname,{username:username})
+    
+//     if(result.length!=0){
+//         res.send(formatData({code:0,data:result}))
+//     }
+    
+//     res.send(formatData({data:result}))
+// })
+
+
 //获取数据并查询数据库是否存在数据---->如果用户名已经存在  返回结果 {code:0,msg:"fail,data:查询结果（json字符串）},"-->后台管理员
 router.get('/managecheck',async(req,res)=>{
     let {username} = req.query

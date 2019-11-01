@@ -5,18 +5,6 @@ let aotu = axios.create({
 })
 
 
-// export async function get(params,config={}){
-//     let {data} = await aotu.get('',{
-//         ...config,
-//         params
-//     });
-//     return data;
-// }
-
-// export async function post(params,config={}){
-//     let {data} = await aotu.post('',params,config);
-//     return data;
-// }
 
 export async function get(url="",params={}){
     let data = await aotu.get(url,params)
