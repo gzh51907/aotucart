@@ -132,10 +132,7 @@ class Category extends Component {
                             )
                         })
                     }
-                    {/* <TabPane tab="sss" key="1" onTabClick={console.log(1)}>11</TabPane>
-                    <TabPane tab="sss" key="2" onTabClick={console.log(2)}>22</TabPane>
-                    <TabPane tab="sss" key="3" onTabClick={console.log(3)}>33</TabPane>
-                    <TabPane tab="sss" key="4" onTabClick={console.log(4)}>44</TabPane> */}
+  
                 </Tabs>
                 <div style={{ marginTop: 16 }}>
                 <Button type="primary" onClick={this.showDrawer}>
@@ -189,7 +186,7 @@ class Category extends Component {
                         </Row>
                     </div>
                     <div className="button-group" style={{textAlign:"center"}}>
-                        <Button>取消</Button>
+                        <Button onClick={this.onClose}>取消</Button>
                         <Button type="primary">提交</Button>
                         
                     </div>
