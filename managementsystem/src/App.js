@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+
 import {
     HashRouter,
     BrowserRouter,
@@ -16,6 +17,8 @@ import Login from './pages/Login'
 // import 'antd/dist/antd.css';
 
 import { connect } from 'react-redux';
+
+@withRouter
 
 class App extends Component {
 

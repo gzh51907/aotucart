@@ -1,14 +1,16 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
-
+import { get } from '../Api'
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
 
 
 class Login extends Component {
-
+    state = {
+        code: ''
+    }
     handleSubmit = e => {
         e.preventDefault();
-        this.props.form.validateFields((err, values) => {
+        this.props.form.validateFields(async (err, values) => {
             if (!err) {
                 console.log('Received values of form: ', values);
                 //拿到val值发送请求进行验证
@@ -16,12 +18,26 @@ class Login extends Component {
                 // let {history} = this.props
                 // history.push(`/Home);
                 // 并保存用户名到本地
+                this.props.history.push("/home")
+                let { username, password, remember } = values;
+                let { data: { code } } = await get('hrr/user/login', {
+                    params: {
+                        username,
+                        password,
+                    }
+                })
+                this.setState({
+                    code
 
+                })
+                // console.log(this.props);
                 
-
             }
+
         });
     };
+
+
 
     render() {
         const { getFieldDecorator } = this.props.form;

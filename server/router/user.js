@@ -170,16 +170,16 @@ router.post('/managereg',async(req,res)=>{
 
 //token检验登录 -- 后台
 router.get('/login',async (req,res)=>{
-    let {username,password,mdl} = req.query;
+    let {username,password,remember} = req.query;
 
-    let result = await mongo.find('admin_login',{username,password});
+    let result = await mongo.find('h_admin_login',{username,password});
 
     
 
     if(result.length>0){
         // 如用户需要免登陆操作，则生成一个token并返回给前端
         let Authorization
-        if(mdl){
+        if(remember){
             Authorization = token.create(username)
         }
         res.send(formatData({data:Authorization}));
