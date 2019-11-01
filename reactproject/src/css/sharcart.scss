@@ -1,0 +1,103 @@
+html,
+body {
+    .search {
+        position: fixed;
+        z-index: 100;
+        right: 20px;
+        top: 210px;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: #fff;
+        text-align: center;
+        line-height: 32px;
+
+        .results {
+            width: 100%;
+            height: 100%-40px;
+        }
+    }
+
+    .search-box {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background: #ffffff;
+        z-index: 500;
+        display: none;
+    }
+
+    .box-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 120;
+        background: #ffffff;
+
+    }
+
+    .masker {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        z-index: 150;
+        background-color: rgba(0, 0, 0, .7);
+    }
+
+    .box-foot {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 10px;
+        box-sizing: border-box;
+        text-align: center;
+        z-index: 200;
+
+        .bt {
+            background-color: #ffe500;
+            color: #1c1c1c;
+            width: 100%;
+            height: 50px;
+            border-radius: 15px;
+        }
+
+        .box-foot-1 {
+            padding: 20px;
+            background: #ffff;
+            box-sizing: border-box;
+            border-radius: 10px;
+            margin-top: 10px;
+
+            .f-box {
+                border-radius: 10px;
+                width: 150px;
+                height: 85px;
+            }
+
+            .f-box1 {
+                background: url(../img/1571904021848.png) no-repeat;
+                background-size: contain;
+            }
+
+            .f-box2 {
+                background: url(../img/1558003031539.png) no-repeat;
+                background-size: contain;
+            }
+
+
+        }
+    }
+
+    .address {
+        width: 100% !important;
+        height: 100% !important;
+
+
+    }
+}
