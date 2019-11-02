@@ -1,0 +1,32 @@
+.home {
+    width: 100%;
+    height: 100%;
+    /* background: #000; */
+}
+
+.header {
+    width: 100%;
+    height: 15%;
+    background: rgba(32, 34, 42, 1);
+    display: flex;
+    align-items: center;
+
+    h2 {
+        color: azure;
+        line-height: 100%;
+        padding-left: 20px;
+    }
+}
+
+.sider {
+    float: left;
+    background: rgba(32, 34, 42, 1);
+    height: 85%;
+    width: 18%;
+}
+.right{
+    float: right;
+    width: 82%;
+    height: 85%;
+    background: rgb(235, 232, 232);
+}

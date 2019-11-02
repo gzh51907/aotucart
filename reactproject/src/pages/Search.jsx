@@ -5,7 +5,7 @@ class Search extends Component {
     render() {
         let { history } = this.props;
         return (
-            <div style={{ paddingLeft: 20, paddingRight: 20 }} className='search'>
+            <div style={{ paddingLeft: 20, paddingRight: 20, width: '100%', height: '100%' }} className='search1'>
                 <Row style={{ height: 50 }}>
                     <Col span={2} style={{ textAlign: 'left', lineHeight: 3 }}>
                         <Icon type="left" onClick={() => { history.goBack() }} />
