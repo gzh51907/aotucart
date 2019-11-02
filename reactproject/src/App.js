@@ -24,6 +24,8 @@ import Login from './pages/Login';
 import Reg from './pages/Reg';
 import Test from './pages/Test';
 import Detail from './pages/Details';
+import Home from './pages/Home';
+
 
 
 @withRouter
@@ -37,12 +39,13 @@ class App extends Component {
 
                 <Route path="/home" component={Home} />
                 {/* buffet 自助租车 */}
-                {/* <Route path="/buffet" component={Buffet} /> */}
+                <Route path="/buffet" component={Buffet} />
                 <Route path="/citychoose" component={CityChoose} />
                 <Route path="/carowner" component={CarOwner} />
                 <Route path="/search" component={Search} />
                 <Route path="/userCenter" component={UserCenter} />
                 <Route path="/login" component={Login} />
+                <Route path="/home" component={Home} />
                 <Route path="/carlist" component={Carlist} />
                 <Route path="/buffet" component={Buffet} />
                 <Route path="/quick" component={Quick} />
