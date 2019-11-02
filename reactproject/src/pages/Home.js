@@ -64,6 +64,10 @@ class Home extends Component {
             
         }
     };
+    goToXingqing = (carNo)=>{
+        console.log(carNo);
+        localStorage.setItem('carNo',carNo)
+    }
     render() {
         let { quickList, bannerList, quickList1, modelList, modelList1 ,show} = this.state;
         let urlArr =['/buffet','/quick','/longrent','/sharecart','/carowner'];
@@ -120,7 +124,9 @@ class Home extends Component {
                                 {
                                     quickList1.map(it => {
                                         return <a className='item'>
-                                            <img src={"https://carphoto.aotuzuche.com/" + it.iconPath} alt="" />
+                                            <LazyLoad>
+                                                <img src={"https://carphoto.aotuzuche.com/" + it.iconPath} alt="" />
+                                            </LazyLoad>
                                             <p>{it.name}</p>
                                         </a>
                                     })
@@ -137,7 +143,9 @@ class Home extends Component {
                         bannerList ?
                             bannerList.map(item => {
                                 return <div>
-                                    <img src={"https://carphoto.aotuzuche.com/" + item.picPath} alt="" style={{ width: '100%', height: 140 }} />
+                                    <LazyLoad>
+                                         <img src={"https://carphoto.aotuzuche.com/" + item.picPath} alt="" style={{ width: '100%', height: 140 }} />
+                                    </LazyLoad>
                                 </div>
                             })
                             :
@@ -165,7 +173,10 @@ class Home extends Component {
                                 <Row gutter={10}>
                                     {item.carList.map(it => {
                                         return <Col span={12} style={{ minHeight: 212 }}>
-                                            <img src={"https://carphoto.aotuzuche.com/" + it.picPath} alt="" style={{ height: 107.5, width: 162.5 }} />
+                                            <LazyLoad>
+                                               <img src={"https://carphoto.aotuzuche.com/" + it.picPath} onClick={this.goToXingqing.bind(this,it.carNo)} alt="" style={{ height: 107.5, width: 162.5 }} /> 
+                                            </LazyLoad>
+                                            
                                             <h3 style={{ fontSize: 16, color: '#333' }}>{it.brandInfo} {it.sweptVolum}</h3>
                                             <p><span style={{ color: '#666', fontSize: 13 }}>{it.plateNumber}</span><span style={{ fontSize: 13, marginLeft: 7, color: ' #f90' }}>{it.carScore + '分'}</span></p>
                                             <p style={{ fontSize: 12, color: '#f75559' }}>￥<span style={{ fontSize: 18 }}>{it.dayPrice}</span>/天</p>
@@ -196,7 +207,8 @@ class Home extends Component {
                                     {
                                         item.carTypeList.map(it => {
                                             return <li>
-                                                <img src={"https://carphoto.aotuzuche.com/" + it.picPath} alt="" style={{ height: 107.5, width: 162.5 }} />
+                                                <LazyLoad><img src={"https://carphoto.aotuzuche.com/" + it.picPath} onClick={this.goToXingqing.bind(this,it.carNo)} alt="" style={{ height: 107.5, width: 162.5 }} /></LazyLoad>
+                                                
                                                 <h3 style={{ fontSize: 16, color: '#333' }}>{it.brandInfo} {it.sweptVolum}</h3>
                                                 <p><span style={{ color: '#666', fontSize: 13 }}>{it.plateNumber}</span><span style={{ fontSize: 13, marginLeft: 7, color: ' #666' }}>{"租赁指数  " + it.leaseIndex}</span></p>
                                                 <p style={{ fontSize: 12, color: '#f75559' }}>￥<span style={{ fontSize: 18 }}>{it.dayPrice}</span>/天</p>
