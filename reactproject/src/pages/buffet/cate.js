@@ -16,13 +16,12 @@ class Cate extends Component {
     
     state = {
         tabPosition: 'left',
-        tab:[],
+        num:[],
+        brand:[],
+        host:[],
         list:[]
     }
 
-    changeTabPosition = tabPosition => {
-        this.setState({ tabPosition });
-    }
 
     //根据不同类型渲染不同结果
     changeShow = ()=>{
@@ -34,54 +33,84 @@ class Cate extends Component {
 
     }
 
+    sendId=(id)=>{
+        localStorage.clear()
+        localStorage.setItem("goodsType",id)
+        this.props.history.push('/buffet')
+    }
 
     async componentDidMount(){
         let {data:{data}} = await get('/goods/all',{
             params:{collection:'z_category'}
         })
         data = data[0]
-        console.log(222,data)
+        // console.log(222,data)
 
-        this.setState({
-            ...this.state,
-            tab:data.brandSortMap,
-            list:data.packageList
-
-        },()=>{
-            // console.log('tab:',this.state.tab)
-            // console.log('list:',this.state.list)
-            // console.log('hoc:',this.props)
+        let {data:{data:list}} = await get('/goods/all',{
+            params:{collection:'z_brand'}
         })
+        console.log(list)
+        this.setState({
+            list,
+            num:Object.keys(data.brandSortMap),
+            brand:Object.values(data.brandSortMap),
+            host:data.hotBrandConfigList
+
+        },()=>{ 
+            console.log('tab:',this.state)
+            
+        })
+        console.log(this.props)
     }   
+ 
 
-
-
-
+    handleClick=(e)=>{
+        console.log(888)
+        // e.stopPropagation()
+    }
 
     render() {
-        let {tab,list} = this.state
+        let {brand,host,num,list} = this.state
         return (
-            <div>
+            <div id="cate">
                 <h2><Icon type="close"></Icon>品牌与车系</h2>
                 <Tabs tabPosition={this.state.tabPosition}>
                     {
-                        tab.map((item,idx)=>{
-                            return (
-                                <TabPane tab={<h4>{item.carPackageTypeText}</h4>} key={item.carPackageTypeText}>
-                                    <Row>
-                                        {
-                                            
-                                        }
-                                        <Col>
-                                            <h4>{item.carPackageTypeText}</h4>
-                                        </Col>
-                                    </Row>
-                                </TabPane>
-                            )
+                        brand.map((item,i)=>{
+                            return item.map((ele,idx)=>{
+                                return(
+                                    <TabPane tab={<div><img src={`../../imgs/logo/${ele.iconName}`} 
+                                    style={{width:"25px",height:"25px"}}/>
+                                    <span>{ele.txt}</span></div>} key={ele.txt} 
+                                    style={{padding:"20px"}} forceRender={false}
+                                    >
+                                        <Row>
+                                            {
+                                                list.map((el,x)=>{
+                                                    return el.type==ele.id?el.typeList.map((a,b)=>{
+                                                        return <Col key={a.txt} 
+                                                                style={{textAlign:"center",padding:"16px 0px"}}
+                                                                onClick = {()=>this.sendId(ele.txt)}
+                                                                >
+                                                                    {a.txt}
+                                                                </Col>
+                                                    }):""
+                                                         
+                                                })
+                                            }
+                                            {/* <Col>
+                                                <h4>{ele.txt}</h4>
+                                            </Col> */}
+                                        </Row>
+                                    </TabPane>
+                                )
+                            })
+                            
                         })
                     }
                     
                 </Tabs>
+                    
             </div>
         )
     }

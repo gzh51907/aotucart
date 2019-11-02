@@ -1,12 +1,14 @@
-function car(goods){
+export const GET_ID = "GET_ID"
+
+function getId(id){
     return {
-        type:'',
-        payload:''
+        type:GET_ID,
+        payload:id
     }
 }
 
 
 
 export default {
-    car
+    getId
 }

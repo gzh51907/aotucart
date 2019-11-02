@@ -1,0 +1,135 @@
+.ant-carousel .slick-dots {
+  text-align: left;
+}
+.slick-slide {
+  // width: 340px !important;
+  // margin-left: 10px;
+}
+.submit {
+  width: 200px !important;
+  height: 50px !important ;
+  background-image: linear-gradient(90deg, #515763, #617080) !important;
+  border-radius: 25px !important;
+  border: none !important;
+  text-align: center;
+  color: #ffffff !important;
+  margin: 0 auto !important;
+}
+.body-bg {
+  height: 100px;
+  background: linear-gradient(0deg, #eee, #e7ebee, #eef2f5, #e4e4e4, #c4ced8);
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  opacity: 0.4;
+  z-index: -10;
+}
+.swipe {
+  color: #ffffff;
+  .swipe-box-title {
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 1;
+    margin-bottom: 30px;
+    color: #ffffff;
+  }
+  .swipe-box-price {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1;
+    margin-bottom: 50px;
+    color: #ffffff;
+  }
+  .swipe-box-price-num {
+    font-size: 20px;
+    font-family: DIN Alternate, Roboto Condensed, sans-serif;
+  }
+  .swipe-box-price-del {
+    font-size: 16px;
+    opacity: 0.4;
+    text-decoration: line-through;
+  }
+
+  .swipe-box-type {
+    font-size: 16px;
+    opacity: 0.9;
+    line-height: 32px;
+    font-weight: 600;
+  }
+  .swipe-box-type-of {
+    line-height: 16px;
+    font-size: 13px;
+  }
+  .swipe-box-img {
+    position: absolute;
+    right: -10px;
+    bottom: -15px;
+    height: 100px;
+    width: 180px;
+  }
+  .swipe-box-img-2 {
+    height: 2.58rem;
+    width: 3.36rem;
+  }
+
+  .swipe-box-img-3 {
+    height: 1.85rem;
+    width: 3.21rem;
+  }
+
+  .swipe-box-img-4 {
+    height: 1.93rem;
+    width: 3.36rem;
+  }
+
+  .swipe-box-img-5 {
+    height: 1.9rem;
+    width: 3.41rem;
+  }
+
+  .swipe-box-1 {
+    background: 100% 100% no-repeat linear-gradient(157deg, #009b92, #2fe5a2);
+    height: 375px;
+    width: 260px !important;
+    padding: 40px 20px 0;
+    border-radius: 10px;
+    position: relative !important;
+  }
+
+  .swipe-box-2 {
+    background: 100% 100% no-repeat linear-gradient(157deg, #06a9c7, #1cd3d1);
+    height: 375px;
+    width: 260px !important;
+    padding: 40px 20px 0;
+    border-radius: 10px;
+    position: relative !important;
+  }
+
+  .swipe-box-3 {
+    background: 100% 100% no-repeat linear-gradient(157deg, #cd9d60, #dccb86);
+    height: 375px;
+    width: 260px !important;
+    padding: 40px 20px 0;
+    border-radius: 10px;
+    position: relative !important;
+  }
+
+  .swipe-box-4 {
+    background: 100% 100% no-repeat linear-gradient(157deg, #687888, #98a9bd);
+    height: 375px;
+    width: 260px !important;
+    padding: 40px 20px 0;
+    border-radius: 10px;
+    position: relative !important;
+  }
+
+  .swipe-box-5 {
+    background: 100% 100% no-repeat linear-gradient(157deg, #e8566e, #fb8971);
+    height: 375px;
+    width: 260px !important;
+    padding: 40px 20px 0;
+    border-radius: 10px;
+    position: relative !important;
+  }
+}

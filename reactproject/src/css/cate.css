@@ -1,4 +1,5 @@
-h2{
+
+#quick h2{
     text-align: center;
     height:60px;
     line-height: 60px;
@@ -6,10 +7,61 @@ h2{
     position: relative;
     margin:0;
 }
-.anticon{
+#quick .anticon{
     float:left;
     position: absolute;
     top: 50%;
-    left:25px;
+    left:25px; 
     transform:translate(0,-50%);
+}
+#cate {
+    height: 100%;
+}
+#cate h2{
+    text-align: center;
+    height:60px;
+    line-height: 60px;
+    padding:0 15px;
+    position: relative;
+    margin:0;
+    border-bottom: 1px solid #e9e9e9;
+}
+#cate .anticon{
+    float:left;
+    position: absolute;
+    top: 50%;
+    left:25px; 
+    transform:translate(0,-50%);
+}
+#cate .ant-tabs{
+    height:100%;
+    overflow: hidden;
+} 
+#cate .ant-tabs-bar{
+    height:100%;
+    overflow: auto;
+    background:#fafafa;
+}
+
+#cate .ant-tabs-content{
+    height: 100%;
+    overflow: scroll;
+    margin-top: 0;
+}
+#cate .ant-tabs-nav-wrap{
+    
+}
+#cate .ant-tabs-tab{
+    text-align: left;
+}
+#cate .ant-tabs-tab span{
+    padding-left: 8px;
+}
+#cate .ant-tabs-tabpane .ant-row{
+    height: 100%;
+}
+
+#cate .ant-tabs-nav-scroll{
+    height:100%;
+    overflow: scroll;
 }

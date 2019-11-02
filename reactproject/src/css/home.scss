@@ -1,0 +1,148 @@
+.home {
+    width: 100%;
+    box-sizing: border-box;
+
+    ul,
+    li {
+        list-style: none;
+    }
+
+    ul {
+        padding-inline-start: 0px;
+    }
+
+    .home-top {
+        height: 175px;
+        width: 100%;
+        padding: 5px 20px;
+        background: url(https://m.atzuche.com/m/index/img/header-img.cdcb67a.png) 0 bottom no-repeat;
+        background-size: cover;
+        position: relative;
+        margin-bottom: 15px;
+    }
+
+    .homeTopClass {
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 100;
+        background-color: #fff;
+        height: 56px;
+        color: #666;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .ant-row-flex {
+        height: 55px;
+        line-height: 55px;
+    }
+
+    .home-input .ant-input-affix-wrapper {
+        height: 45px;
+        width: 90%;
+        margin-left: 20px;
+        position: absolute;
+        bottom: 20px;
+        left: 0;
+        background: #fff,
+    }
+
+    .icon-list {
+        height: 93px;
+        width: 90%;
+        margin: 0px 10px;
+        // padding: 20px 0px;
+        position: relative;
+        // overflow-x: auto;
+
+        .icon-item {
+            width: 100%;
+            height: 73px;
+            display: flex;
+            -webkit-box-pack: start;
+            justify-content: flex-start;
+
+            .item {
+                display: flex;
+                width: 20%;
+                justify-content: flex-start;
+                // -webkit-box-align: center;
+                align-items: center;
+                -webkit-box-orient: vertical;
+                -webkit-box-direction: normal;
+                flex-direction: column;
+
+                >img {
+                    height: 50px;
+                    width: 50px;
+                    margin-bottom: 10px;
+                    border-radius: 50%;
+                }
+
+                >p {
+                    display: block;
+                    color: rgb(51, 51, 51);
+                    text-align: center;
+                    font-size: 13px;
+                    line-height: 1;
+                    margin-bottom: 0;
+                }
+            }
+        }
+
+    }
+
+    .icon-list .ant-carousel .slick-dots {
+
+        li {
+            width: 3px;
+            height: 3px;
+            opacity: 0.5;
+            background: rgb(26, 204, 50);
+        }
+
+        .slick-active {
+            width: 9px;
+            height: 3px;
+            opacity: 1;
+            border-radius: 1.5px;
+        }
+
+    }
+
+    p {
+        margin-bottom: 0;
+    }
+
+    .icon-list .ant-carousel .slick-dots-bottom {
+        bottom: -10px;
+    }
+
+    .car-list {
+        padding: 0px 20px;
+        margin-top: 20px;
+
+        .ant-row-flex {
+            height: 30px;
+            line-height: 30px;
+        }
+
+        ul {
+            height: 212px;
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            // overflow: -moz-scrollbars-none;
+
+            ::-webkit-scrollbar {
+                display: none;
+            }
+
+            li {
+                // float: left;
+                margin-right: 10px;
+            }
+        }
+    }
+}
