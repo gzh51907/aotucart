@@ -39,6 +39,10 @@
 
 }
 
+ul li {
+    list-style: none;
+}
+
 .city-list li {
     width: 20%;
     height: 35px;

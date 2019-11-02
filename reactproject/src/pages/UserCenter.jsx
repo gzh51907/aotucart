@@ -60,26 +60,19 @@ class UserCenter extends Component {
         history.push(url);
     }
     componentDidMount() {
-        // let { username } = JSON.parse(localStorage.getItem('user'))
-        // if (username) {
-        //     // console.log(username);
-        //     this.setState({
-        //         user: username
-        //     })
-        // }
 
     }
     render() {
         let { data, user } = this.state;
         return (
             <div style={{ paddingLeft: 20, paddingRight: 20 }}>
-                <div style={{ paddingLeft: 20, paddingRight: 20, position: "fixed", top: 0, left: 0, zIndex: 999, width: '100%', height: 50, backgroundColor: '#fff' }}>
+                <div style={{ paddingLeft: 20, paddingRight: 20, position: "fixed", top: 0, left: 0, zIndex: 999, width: '100%', height: 50, backgroundColor: '#fff', lineHeight: 3 }}>
                     <Row type="flex">
                         <Col span={4} order={1} style={{ textAlign: 'left' }} >
                             <Icon type="left" />
                         </Col>
                         <Col span={16} order={2} style={{ textAlign: 'center' }}>
-                            <h2>个人中心</h2>
+                            <h3>个人中心</h3>
                         </Col>
                         <Col span={4} order={3} style={{ textAlign: 'right' }} onClick={this.goto.bind(this, '/home')}>
                             <Icon type="home" />

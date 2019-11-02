@@ -1,62 +1,102 @@
 import React, { Component } from 'react';
 import { Row, Col, Icon, Input, Carousel } from 'antd';
 import '../css/home.scss';
+import LazyLoad from 'react-lazyload';
 // axios请求
 import axios from 'axios';
 let aotu = axios.create({
     baseURL: 'http://10.3.133.66:1907/'
 })
 class Home extends Component {
-    state = {
-        bannerlist: [],
-        quickList: [],
-        quickList1: [],
-        modelList: [],
-        modelList1: [],
-
+    constructor(props){
+        super(props);
+        this.state={
+            bannerlist: [],
+            quickList: [],
+            quickList1: [],
+            modelList: [],
+            modelList1: [],
+            show:false,
+            topClassName:''
+        };
+        this.windowOnScroll();
+        let isScrollTop = true;
     }
     async componentDidMount() {
         let { data } = await aotu.get('goods/all?collection=y_banner')
         let { bannerList } = data.data[0]
-        // console.log(data.data[0].quickList.slice(5))
         this.setState({
             bannerList: bannerList,
             quickList: data.data[0].quickList.slice(0, 5),
             quickList1: data.data[0].quickList.slice(5)
         })
+        
         let result = await aotu.get('goods/all?collection=y_home')
-        console.log(result.data.data[0].modelList.slice(4, 5));
+        // console.log(result.data.data[0].modelList.slice(4, 5));
         this.setState({
             modelList: result.data.data[0].modelList.slice(1, 3),
             modelList1: result.data.data[0].modelList.slice(4, 5)
         })
     }
+    goto = (url) => {
+        let { history } = this.props
+        history.push(url);
+    }
+    // 吸顶
+    
+    windowOnScroll(){
+        let _this = this;
+        window.onscroll = function(){
+             //获取滚动条滚动的距离
+            let h = document.documentElement.scrollTop;
+            // console.log(h);
+            if(h > 175){
+                _this.setState({
+                    show:true,
+                    topClassName:'homeTopClass'
+                })
+            }else{
+                _this.setState({
+                    show:false,
+                    topClassName:''
+                })
+            }
+            
+        }
+    };
     render() {
-        let { quickList, bannerList, quickList1, modelList, modelList1 } = this.state;
-        // console.log(modelList1.carTypeList)
-        console.log(this.props);
+        let { quickList, bannerList, quickList1, modelList, modelList1 ,show} = this.state;
+        let urlArr =['/buffet','/quick','/longrent','/sharecart','/carowner'];
+        quickList.map((item, index)=> {
+            item.targetUrl = urlArr[index]
+       })
         let { history } = this.props;
         return (
-            <div>
+            <div className="home">
                 <div className="home-top">
-                    <Row type="flex">
-                        <Col span={4} order={1} style={{ textAlign: 'center' }} >
-                            <span style={{ fontSize: 18, color: '#fff', }}>上海</span><Icon type="down-circle" style={{ color: '#fff', marginLeft: 5 }} theme='filled' />
-                        </Col>
-                        <Col span={18} order={2} style={{ textAlign: 'center' }}>
-                            2 col-order-3
-                        </Col>
+                    <div style={{width:'100%'}} className={this.state.topClassName}>
+                        <Row type="flex" >
+                            <Col span={4} order={1} style={{ textAlign: 'center' }} >
+                                <span style={{ fontSize: 18, color: '#fff', }}>上海</span><Icon type="down-circle" style={{ color: '#fff', marginLeft: 5 }} theme='filled' />
+                            </Col>
+                            <Col span={16} order={2} style={{ textAlign: 'center' }}>
+                                <div style={{lineHeight:56,height:'100%',width:'100%'}}>
+                                    <Input placeholder="搜索目的地、品牌、车型" style={{display:show?'block':'none',width:'100%',height:30,backgroundColor:'#fff',borderRadius:15,bottom:0}} onClick={this.goto.bind(this,'/search')} prefix={<Icon type="search" style={{ color: 'rgba(0,0,0,.25)' }} />}/>
+                                </div>
+                                
+                            </Col>
 
-                        <Col span={2} order={3} style={{ textAlign: 'center' }}>
-                            <Icon type="user" style={{ color: '#FFF', fontSize: 18 }} />
-                        </Col>
-                    </Row>
+                            <Col span={4} order={3} style={{ textAlign: 'center' }}>
+                                <Icon type="user" style={{ color: '#FFF', fontSize: 18 }} onClick={()=>{history.push('/userCenter')}} />
+                            </Col>
+                        </Row>
+                    </div>
+                    
+                    <div className='home-input'>
+                        <Input placeholder="搜索目的地、品牌、车型" onClick={this.goto.bind(this,'/search')} prefix={<Icon type="search" style={{ color: 'rgba(0,0,0,.25)' }} />}/>
+                    </div>
+                    
 
-                    <Input
-                        placeholder="搜索目的地、品牌、车型"
-                        prefix={<Icon type="search" style={{ color: 'rgba(0,0,0,.25)' }} />}
-
-                    />
                 </div>
                 <div className='icon-list'>
                     <Carousel>
@@ -64,8 +104,10 @@ class Home extends Component {
                             <div className="icon-item">
                                 {
                                     quickList.map(it => {
-                                        return <a className='item'>
-                                            <img src={"https://carphoto.aotuzuche.com/" + it.iconPath} alt="" />
+                                        return <a className='item' onClick={this.goto.bind(this,it.targetUrl)}>
+                                            <LazyLoad>
+                                                <img src={"https://carphoto.aotuzuche.com/" + it.iconPath} alt="" />
+                                            </LazyLoad>
                                             <p>{it.name}</p>
                                         </a>
                                     })
@@ -89,8 +131,8 @@ class Home extends Component {
 
                     </Carousel>
                 </div>
-
-                <Carousel autoplay style={{ paddingLeft: 20, paddingRight: 20 }}>
+                <div style={{ paddingLeft: 20, paddingRight: 20 }}>
+                    <Carousel autoplay >
                     {
                         bannerList ?
                             bannerList.map(item => {
@@ -102,7 +144,9 @@ class Home extends Component {
                             ''
                     }
 
-                </Carousel>
+                    </Carousel>
+                </div>
+                
 
                 <div className='car-list'>
                     {

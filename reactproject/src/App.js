@@ -16,6 +16,7 @@ import {
 } from 'react-router-dom';
 
 
+
 //引入路由
 import Home from './pages/Home';
 import Buffet from './pages/Buffet';
@@ -34,7 +35,10 @@ class App extends Component {
         return (<div>
 
             <Switch >
+
                 <Route path="/home" component={Home} />
+                {/* buffet 自助租车 */}
+                <Route path="/buffet" component={Buffet} />
                 <Route path="/citychoose" component={CityChoose} />
                 <Route path="/carowner" component={CarOwner} />
                 <Route path="/search" component={Search} />

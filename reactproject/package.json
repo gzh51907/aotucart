@@ -18,7 +18,8 @@
   "dependencies": {
     "antd": "^3.24.2",
     "react": "^16.10.2",
-    "react-dom": "^16.10.2"
+    "react-dom": "^16.10.2",
+    "react-lazyload": "^2.6.2"
   },
   "devDependencies": {
     "@babel/core": "^7.6.4",

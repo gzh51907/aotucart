@@ -33,7 +33,7 @@ class Login extends Component {
         e.preventDefault();
         this.props.form.validateFields({ force: true }, async (err, values) => {
             if (!err) {
-                console.log('login: ', values);
+                // console.log('login: ', values);
                 let { username, password } = values;
                 let { data } = await Api.get('user/loginin', {
                     params: {
@@ -89,8 +89,8 @@ class Login extends Component {
     render() {
         const { getFieldDecorator } = this.props.form;
         return (
-            <div>
-                <div style={{ position: 'relative' }}>
+            <div className="login">
+                <div style={{ position: 'relative' }} className="login1">
                     <img src="../assets/img/login.jpg" style={{ height: 255, width: '100%' }} alt="" />
                     <h1 style={{ backgroundImage: 'url(../assets/img/logo.png)', position: 'absolute', top: -1, left: -1, width: 121, height: 59 }}></h1>
                     <div style={{ position: 'absolute', left: 15, top: 200, paddingLeft: 15, paddingRight: 15, backgroundColor: '#fff', borderTopLeftRadius: 15, width: '90%' }}>

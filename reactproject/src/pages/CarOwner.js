@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Button, Drawer, Icon, Form, Select, Input } from 'antd';
+import { Button, Drawer, Icon, Form, Select, Input, notification } from 'antd';
 const { Option } = Select;
-
+import Api from '../Api';
 class CartOwner extends Component {
     state = { visible: false };
 
@@ -17,19 +17,30 @@ class CartOwner extends Component {
     };
     handleSubmit = e => {
         e.preventDefault();
-        this.props.form.validateFields((err, values) => {
+        this.props.form.validateFields(async (err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
+                // console.log('Received values of form: ', values);
+                let { carBrand, carModel, city, name, phone, time } = values
+                // 保存到数据库
+                let { data } = await Api.post('goods/carowner', {
+                    carBrand, carModel, city, name, phone, time
+                })
+                if (data.code === 1) {
+                    notification.open({
+                        message: '加入车主',
+                        description:
+                            '车主加入成功！',
+                        onClick: () => {
+                            console.log('Notification Clicked!');
+                        },
+                    });
+                }
             }
+
+
         });
     };
 
-    handleSelectChange = value => {
-        console.log(value);
-        // this.props.form.setFieldsValue({
-        //     note: `Hi, ${value === 'male' ? 'man' : 'lady'}!`,
-        // });
-    };
     render() {
         let { show } = this.state;
         const { getFieldDecorator } = this.props.form;
@@ -66,7 +77,6 @@ class CartOwner extends Component {
                             })(
                                 <Select
                                     placeholder="请选择租期"
-                                    onChange={this.handleSelectChange}
                                     style={{ border: 0 }}
                                 >
                                     <Option value="短租(短租灵活，以天为单位">短租(短租灵活，以天为单位)</Option>

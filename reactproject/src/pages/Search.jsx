@@ -3,11 +3,12 @@ import { Row, Col, Icon, Input, Button } from 'antd';
 import '../css/search.css';
 class Search extends Component {
     render() {
+        let { history } = this.props;
         return (
-            <div style={{ paddingLeft: 20, paddingRight: 20 }}>
+            <div style={{ paddingLeft: 20, paddingRight: 20 }} className='search'>
                 <Row style={{ height: 50 }}>
                     <Col span={2} style={{ textAlign: 'left', lineHeight: 3 }}>
-                        <Icon type="left" />
+                        <Icon type="left" onClick={() => { history.goBack() }} />
                     </Col>
                     <Col span={22} style={{ textAlign: 'right', lineHeight: 3 }}>
                         <h5>清空</h5>
