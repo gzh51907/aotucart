@@ -16,6 +16,8 @@ let huiGoodsRouter = require('./zxh/goods')
 //国庆
 let qgqGoodsRouter = require('./qgq/goods')
 
+//
+let hrrUserRouter = require('./hrr/user')
 
 //允许跨域请求
 router.use((req,res,next)=>{
@@ -45,6 +47,10 @@ router.use('/hui/goods',huiGoodsRouter)
 router.use('/qgq/goods',qgqGoodsRouter)
 
 // router.use('/login',loginRouter)
+
+//何如锐
+router.use('/hrr/user',hrrUserRouter)
+
 
 //校验token
 router.get('/verify',(req,res)=>{

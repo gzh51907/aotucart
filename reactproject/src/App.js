@@ -21,6 +21,7 @@ import Quick from './pages/Quick';
 import Login from './pages/Login';
 import Reg from './pages/Reg';
 import Test from './pages/Test';
+import Detail from './pages/Details';
 
 
 @withRouter
@@ -44,6 +45,7 @@ class App extends Component{
                 <Route path="/buffet" component={Buffet} />
                 <Route path="/quick" component={Quick} />
                 <Route path="/test" component={Test} />
+                <Route path="/detail" component={Detail} />
                 <Redirect from="/" to="/home" exact />
                 <Route render={() => <div><h1>404</h1>页面不存在</div>} />
             </Switch>

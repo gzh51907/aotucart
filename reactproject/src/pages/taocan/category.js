@@ -87,7 +87,7 @@ class Category extends Component {
     render() {
         let {tab,list,datainf:dt,detail} = this.state
         return (
-            <div style={{height:'100%',overflow:"hidden",position: 'relative'}}>
+            <div style={{height:'100%',overflow:"hidden",position: 'relative'}}  id="category">
                 <Row>
                     <Col span={24}></Col>
                     <Col span={24}></Col>

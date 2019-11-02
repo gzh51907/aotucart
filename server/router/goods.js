@@ -61,8 +61,22 @@ router.post('/change',async(req,res)=>{
 })
 
 
-
-
+//
+router.post('/carowner',async (req,res)=>{
+    let {carBrand,
+     carModel,
+     city,
+     name,
+     phone,
+     time} = req.body;
+    let result = await mongo.create('y_carowner',[{carBrand,
+     carModel,
+     city,
+     name,
+     phone,
+     time}]);
+     res.send(formatData({data:result}))
+    })
 
 //获取所有商品
 
