@@ -1,14 +1,78 @@
 import React, { Component } from "react";
-import { Icon, Carousel, Drawer, Button, Radio, Row, Col, Input } from "antd";
-
+import {
+  Icon,
+  Carousel,
+  Drawer,
+  Button,
+  Radio,
+  Row,
+  Col,
+  Input,
+  List,
+  message,
+  Avatar,
+  Spin
+} from "antd";
+// import reqwest from "reqwest";
 import BMap from "BMap";
-import "../css/sharcart.css";
+import InfiniteScroll from "react-infinite-scroller";
+import "../css/sharecart.css";
 class ShareCart extends Component {
   state = {
     city: "",
     show: true,
     visible: false,
-    search: true
+    search: false,
+    addressS: [],
+    data: [],
+    loading: false,
+    hasMore: true,
+    i: 0
+  };
+  godel() {
+    this.setState({
+      search: false
+    });
+  }
+
+  handleInfiniteOnLoad = () => {
+    let adderss = this.state.addressS;
+    let { i, data } = this.state;
+    this.setState({
+      loading: true
+    });
+    console.log(data);
+    if (data.length > adderss.length - 1) {
+      message.warning("Infinite List loaded all");
+
+      this.setState({
+        hasMore: false,
+        loading: false
+      });
+      console.log("结束");
+      return;
+    } else {
+      let le = data.length;
+      let arr = adderss.slice(le + 10, le + 20);
+      console.log(adderss);
+      for (let i = 0; i < arr.length; i++) {
+        data.push(arr[i]);
+      }
+
+      this.setState({
+        i: i + 1,
+        data: data
+      });
+      console.log(data);
+    }
+
+    // this.fetchData(res => {
+    //   data = data.concat(res.results);
+    //   this.setState({
+    //     data,
+    //     loading: false
+    //   });
+    // });
   };
   showDrawer = () => {
     this.setState({
@@ -43,15 +107,76 @@ class ShareCart extends Component {
       search: true
     });
   }
-  SearchCity(ads) {
-    console.log(ads);
+  //地址查询1
+
+  SearchCity() {
+    console.log(1);
+    let city = this.search.state.value;
+    var ResultArray = [];
     var map = new BMap.Map("address");
-    // var point = new BMap.Point(116.331398, 39.897445);
+    map.centerAndZoom(new BMap.Point(localStorage.lng, localStorage.lat), 15);
     var local = new BMap.LocalSearch(map, {
-      renderOptions: { map: map, panel: "results" }
+      pageCapacity: 100
     });
-    local.search(ads);
+    //   {
+    //   onSearchComplete: function(results) {
+    //     // 需要获取当前搜索总共有多少条结果
+    //     var totalPages = results.getNumPages();
+    //     var currPage = results.getPageIndex();
+
+    //     // if (currPage < totalPages - 1) {
+    //     //   ResultArray.push(local.getResults().Br);
+    //     //   console.log(local.getResults().Br);
+    //     //   local.gotoPage(currPage + 1); // 遍历到最后一页之后不再进行下一页搜索，此时，已经获取到全部的搜索结果，
+    //     // } else {
+    //     //   // 已经到达最后一页结果
+    //     // ResultArray.push(local.getResults());
+    //     // }
+
+    //     // handleInfiniteOnLoad = () => {
+    //     //   let data = ResultArray;
+    //     //   this.setState({
+    //     //     data,
+    //     //     loading: true
+    //     //   });
+    //     //   if (currPage > totalPages - 1) {
+    //     //     this.setState({
+    //     //       hasMore: false,
+    //     //       loading: false
+    //     //     });
+    //     //     return;
+    //     //   }
+    //     // };
+    //   }
+    // });
+    // console.log(ResultArray);
+    local.search(city);
+    var arr = [];
+    let pre = new Promise((resolve, reject) => {
+      local.setSearchCompleteCallback(function(result) {
+        for (var i = 0; i < result.getCurrentNumPois(); i++) {
+          arr.push(result.getPoi(i));
+        }
+        resolve(arr);
+      });
+    });
+    pre.then(arr => {
+      if (local.sf) {
+        this.setState({
+          addressS: arr,
+          data: arr.slice(0, 10)
+        });
+      }
+
+      this.dw();
+    });
+    // var time = setTimeout(() => {
+    //   clearTimeout(time);
+
+    // }, 3000);
   }
+
+  //
   dw() {
     localStorage.cy = "北京";
     var map = new BMap.Map("address");
@@ -71,7 +196,8 @@ class ShareCart extends Component {
           result
         ) {
           if (result) {
-            console.log(result);
+            localStorage.lng = result.point.lng;
+            localStorage.lat = result.point.lat;
             localStorage.city = result.addressComponents.city;
           }
         });
@@ -97,7 +223,7 @@ class ShareCart extends Component {
     );
     var marker = new BMap.Marker(point, { Icon: myIcon }); // 创建标注
     map.addOverlay(marker);
-    console.log(point);
+
     // var myIcon = new BMap.Icon(
     //   "http://7xic1p.com1.z0.glb.clouddn.com/markers.png",
     //   new BMap.Size(23, 25)
@@ -178,18 +304,58 @@ class ShareCart extends Component {
                   placeholder="查找起始位置或目的地"
                   size="large"
                   style={{ border: 0 }}
-                  onChange={this.SearchCity()}
+                  onChange={() => {
+                    let tm = setTimeout(() => {
+                      this.SearchCity();
+                      clearTimeout(tm);
+                    }, 2000);
+                  }}
+                  ref={search => (this.search = search)}
                 />
               </Col>
+              <div
+                id="searchResultPanel"
+                style={{
+                  border: "1 solid #C0C0C0",
+                  width: 150,
+                  height: "auto",
+                  display: "none"
+                }}
+              ></div>
+
               <Col
+                onClick={this.godel.bind(this)}
                 span={5}
                 style={{ height: "100%", lineHeight: 3, textAlign: "right" }}
               >
-                取消
+                <a>取消</a>
               </Col>
             </Row>
           </div>
-          <div className="results"></div>
+          <div className="demo-infinite-container">
+            <InfiniteScroll
+              initialLoad={false}
+              pageStart={0}
+              loadMore={this.handleInfiniteOnLoad}
+              hasMore={!this.state.loading && this.state.hasMore}
+              useWindow={false}
+            >
+              <List
+                dataSource={this.state.data}
+                renderItem={item => (
+                  <List.Item key={item.uid}>
+                    <div>{item.address}</div>
+                  </List.Item>
+                )}
+              >
+                {this.state.loading && this.state.hasMore && (
+                  <div className="demo-loading-container">
+                    <Spin />
+                  </div>
+                )}
+              </List>
+            </InfiniteScroll>
+          </div>
           <div
             style={{
               textAlign: "center",
@@ -234,18 +400,22 @@ class ShareCart extends Component {
             </Col>
           </Row>
           <Row style={{ height: 50, textAlign: "center" }}>
-            <Col span={8} style={{ height: "100%" }}>
-              自由租
+            <Col
+              span={8}
+              style={{ height: "100%" }}
+              onClick={this.goto.bind(this, "/firstorder")}
+            >
+              <a>自由租</a>
             </Col>
             <Col
               span={8}
               style={{ height: "100%" }}
               onClick={this.goto.bind(this, "/firstorder")}
             >
-              抢先订
+              <a> 抢先订</a>
             </Col>
             <Col span={8} style={{ height: "100%" }}>
-              好玩的车
+              <a> 好玩的车</a>
             </Col>
           </Row>
         </div>

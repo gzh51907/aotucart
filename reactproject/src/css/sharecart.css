@@ -22,6 +22,21 @@ body .search-box {
   z-index: 500;
   display: none;
 }
+html .search-box .demo-infinite-container,
+body .search-box .demo-infinite-container {
+  border: 1px solid #e8e8e8;
+  border-radius: 4px;
+  overflow: auto;
+  padding: 8px 24px;
+  height: 300px;
+}
+html .search-box .demo-loading-container,
+body .search-box .demo-loading-container {
+  position: absolute;
+  bottom: 40px;
+  width: 100%;
+  text-align: center;
+}
 html .box-header,
 body .box-header {
   position: fixed;

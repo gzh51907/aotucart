@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Icon, Carousel, Button, Row, Col, Tabs, Tag } from "antd";
 const { TabPane } = Tabs;
-import "../css/sharcart.css";
+import "../css/sharecart.css";
 import "../css/firstorder.css";
 class ShareCart extends Component {
   state = {

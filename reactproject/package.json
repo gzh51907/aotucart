@@ -20,7 +20,9 @@
     "element-react": "^1.4.34",
     "element-theme-default": "^1.4.13",
     "react": "^16.10.2",
-    "react-dom": "^16.10.2"
+    "react-dom": "^16.10.2",
+    "react-infinite-scroller": "^1.2.4",
+    "react-lazyload": "^2.6.2"
   },
   "devDependencies": {
     "@babel/core": "^7.6.4",
