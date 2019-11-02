@@ -8,65 +8,9 @@ let aotu = axios.create({
     baseURL: 'http://10.3.133.66:1907/'
 })
 class Home extends Component {
-    constructor(props){
-        super(props);
-        this.state={
-            bannerlist: [],
-            quickList: [],
-            quickList1: [],
-            modelList: [],
-            modelList1: [],
-            show:false,
-            topClassName:''
-        };
-        this.windowOnScroll();
-        let isScrollTop = true;
-    }
-    async componentDidMount() {
-        let { data } = await aotu.get('goods/all?collection=y_banner')
-        let { bannerList } = data.data[0]
-        this.setState({
-            bannerList: bannerList,
-            quickList: data.data[0].quickList.slice(0, 5),
-            quickList1: data.data[0].quickList.slice(5)
-        })
+
+    async componentDidMount(){
         
-        let result = await aotu.get('goods/all?collection=y_home')
-        // console.log(result.data.data[0].modelList.slice(4, 5));
-        this.setState({
-            modelList: result.data.data[0].modelList.slice(1, 3),
-            modelList1: result.data.data[0].modelList.slice(4, 5)
-        })
-    }
-    goto = (url) => {
-        let { history } = this.props
-        history.push(url);
-    }
-    // 吸顶
-    
-    windowOnScroll(){
-        let _this = this;
-        window.onscroll = function(){
-             //获取滚动条滚动的距离
-            let h = document.documentElement.scrollTop;
-            // console.log(h);
-            if(h > 175){
-                _this.setState({
-                    show:true,
-                    topClassName:'homeTopClass'
-                })
-            }else{
-                _this.setState({
-                    show:false,
-                    topClassName:''
-                })
-            }
-            
-        }
-    };
-    goToXingqing = (carNo)=>{
-        console.log(carNo);
-        localStorage.setItem('carNo',carNo)
     }
     render() {
         let { quickList, bannerList, quickList1, modelList, modelList1 ,show} = this.state;

@@ -1,7 +1,7 @@
 /**
  * 购物车reducer
  */
-// import {REMOVE_FROM_CART,CHANGE_QTY,CLEAR_CART,ADD_TO_CART} from '../action/cart';
+import {GET_ID} from '../action/car';
 
 let initialState = {
     carlist:[]

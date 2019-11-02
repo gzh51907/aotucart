@@ -99,11 +99,27 @@ router.post("/change", async (req, res) => {
         }
     );
     // let result = update('test',{name:new RegExp(psname,'g')},{price:price},{kucun:kucun},{current_price:currentprice},{goods_brief:info},{default_photo:majorimg},{name:psname})
+    
+    res.send(formatData({data:result})) 
+})
 
-    res.send(formatData({
-        data: result
-    }));
-});
+
+//
+router.post('/carowner',async (req,res)=>{
+    let {carBrand,
+     carModel,
+     city,
+     name,
+     phone,
+     time} = req.body;
+    let result = await mongo.create('y_carowner',[{carBrand,
+     carModel,
+     city,
+     name,
+     phone,
+     time}]);
+     res.send(formatData({data:result}))
+    })
 
 //获取所有商品
 

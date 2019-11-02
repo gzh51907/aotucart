@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Carousel,Row,Col ,Icon,Menu, Dropdown, message} from 'antd';
+import { Carousel,Row,Col ,Icon,Menu, Dropdown, message,Drawer} from 'antd';
 
 import '../css/buffet.css'
 import {get} from '../Api'
 import Loadding from './buffet/loading'
-
+import Cate from './buffet/cate'
 
 
 class Buffet extends Component {
@@ -17,28 +17,56 @@ class Buffet extends Component {
         sort:'none',
         color:'#e9e9e9',
         paixu:'综合排序',
-        type:'zonghe'
+        type:'zonghe',
+        visible:false,
+        typeid:'',
     }
 
     // car=[]
 
     async componentDidMount(){
+        this.setState({
+            typeid:2
+        })
         let {total,type} = this.state
-        if(type=='zonghe'){
-            let data = await this.layLoad(10,0)
-            // console.log(data)
+        let carbrand = localStorage.getItem("goodsType")
+        // this.setState({
+        //     typeid:localStorage.getItem("goodsType")
+        // },()=>{
+        //     
+        // })
+
+        if(carbrand){
+            let {data:{data}} = await get('/hui/goods/keyword',{
+                params:{
+                    keyword:carbrand
+                }
+            })
+            // console.log("++++++______+++++___++++",data)
             this.setState({
                 ...this.state,
                 carlist:data,
             })
         }else{
-            let data = await this.layLoad(60,0)
-            // console.log(data)
-            this.setState({
-                ...this.state,
-                carlist:data,
-            })
+            if(type=='zonghe'){
+                let data = await this.layLoad(10,0)
+                // console.log(data)
+                this.setState({
+                    ...this.state,
+                    carlist:data,
+                })
+            }else{
+                let data = await this.layLoad(60,0)
+                // console.log(data)
+                this.setState({
+                    ...this.state,
+                    carlist:data,
+                })
+            }
         }
+
+
+        
         
 
        
@@ -145,11 +173,11 @@ class Buffet extends Component {
                     skip
                 }
             })
-            console.log('22222')
+            // console.log('22222')
             return data
 
         }else if(this.state.type=='zuce'){
-            console.log(777777777)
+            // console.log(777777777)
             let {data:{data}} = await get('/hui/goods/zucidown',{
                 params:{
                     sort:"transCount",
@@ -168,7 +196,7 @@ class Buffet extends Component {
             })
             return data
         }else if(this.state.type=='zonghe'){
-            console.log(8888)
+            // console.log(8888)
             let {data:{data}} = await get('/hui/goods/pages',{
                 params:{
                     limit,
@@ -180,13 +208,32 @@ class Buffet extends Component {
 
         
     }
-
+  
+    //抽屉
+    showDrawer = () => {
+        this.setState({
+          visible: true,
+        });
+        this.props.history.push("/test")
+      };
+    
+      onClose = () => {
+        this.setState({
+          visible: false,
+        });
+      };
+    
+      sendCar=(id)=>{
+        localStorage.removeItem("carNo")
+        localStorage.setItem("carNo",id)
+        this.props.history.push('/detail')
+      }
 
     render() {
         let {carlist,show,sort,paixu} = this.state
         // console.log(222,carlist)
         return (
-            <div className="box" style={{height:"100%",background:"#e9e9e9",overflow:"auto"}} ref={e=>(this.scrollDom = e)}>
+            <div  style={{height:"100%",background:"#e9e9e9",overflow:"hidden"}}  id="buffet">
                 <Row className="title" type="flex" align="middle">
                     <Col span={3}>
                         <Icon type="left" onClick={this.goto.bind(this,'/home')}></Icon>
@@ -198,16 +245,16 @@ class Buffet extends Component {
                         <Icon type="home" onClick={this.goto.bind(this,'/home')}></Icon>
                     </Col>
                 </Row>
-                <div className="top">
+                {/* <div className="top">
                      
-                </div>
-                <div className="main">
+                </div> */}
+                <div className="main" style={{height:"100%",overflow:"auto"}} ref={e=>(this.scrollDom = e)}>
                     <div className="content-top">
                         <Row style={{height:45,borderBottom:"1px #e9e9e9 solid"}}className="c-top">
                             <Col span={6} style={{height:45,lineHeight:"45px",color:"#58bc58"}} onClick={this.onSort.bind(this)} >{paixu}<Icon type='caret-down' style={{color:'#999'}}></Icon></Col>
                             <Col span={6} style={{height:45,lineHeight:"45px"}}>区域<Icon type='caret-down' style={{color:'#999'}}></Icon></Col>
                             <Col span={6} style={{height:45,lineHeight:"45px"}}>租金<Icon type='caret-down' style={{color:'#999'}}></Icon></Col>
-                            <Col span={6} style={{height:45,lineHeight:"45px"}}>品牌<Icon type='caret-down' style={{color:'#999'}}></Icon></Col>
+                            <Col span={6} style={{height:45,lineHeight:"45px"}}>品牌<Icon type='caret-down' style={{color:'#999'}} onClick={this.showDrawer}></Icon></Col>
                             <Col className="sort" span={24} style={{display:sort}}>
                                 <Row ref={e=>(this.sort = e)} >
                                     <Col onClick={this.sortBtn.bind(this,'综合排序',"zonghe")}>综合排序</Col>
@@ -220,12 +267,12 @@ class Buffet extends Component {
                         </Row>
                         <Row style={{height:50}}></Row>
                     </div>
-                    <Row className="banner"><img src="../imgs/zizhubanner.jpg"/></Row>
+                    <Row className="banner" style={{marginTop:"50px"}}><img src="../imgs/zizhubanner.jpg"/></Row>
                     <Row className="content">
                         {
                             carlist.map((item,i)=>{
                                 
-                                return <Col className="cars" style={{marginBottom:"10px"}} key={i}>
+                                return <Col className="cars" style={{marginBottom:"10px"}} key={i} onClick={()=>this.sendCar(item.carNo)}>
                                         <img src={`https://carphoto.atzuche.com/`+item.coverPic} style={{width:150,height:100}}/>
                                         <div className="cars-right">
                                             <h4 className="car-name">{item.brand}</h4>
@@ -244,6 +291,18 @@ class Buffet extends Component {
                     }
                     
                 </div>
+                
+                {/* <Drawer
+               
+                placement="bottom"
+                closable={false}
+                onClose={this.onClose}
+                visible={this.state.visible}
+                getContainer={false}
+                style={{ position: 'absolute' }}
+                >
+                    <Cate></Cate>
+                </Drawer> */}
             </div>
         ) 
     }

@@ -26,17 +26,27 @@ router.post('/update',async(req,res)=>{
     res.send(formatData({data:data}))
 })
 
-// router.post('/update',async(req,res)=>{
-//     let data = await find('user',{})
-//     data.forEach((item,i)=>{
-        
-//         // item.cart = []
-//         update('user',{name:new RegExp(keyword,'g')},{cart:[]})
-//     })
-     
-//     // let result = await update('goodslist_all',{},{kucun:randomNum})
-//     res.send(formatData({data:data}))
-// })
+//根据关键字keyword获取商品
+router.get('/keyword',async(req,res)=>{
+    let {keyword} = req.query
+
+    let result = await find('z_carlist',{brand:new RegExp(keyword,'g')})/*正则--名字包含keyword */
+    res.send(formatData({data:result}))
+})
+
+
+//根据id获取商品
+router.get('/one',async(req,res)=>{
+    let {id} = req.query
+    // id = Number(id)
+    let result = await find("z_carlist",{carNo:id})
+    result=result[0]
+    res.send(formatData({data:result}))
+    // res.send(id)
+})
+
+
+
 
 
 
