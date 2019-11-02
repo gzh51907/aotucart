@@ -1,0 +1,25 @@
+.login .login1 #components-form-demo-normal-login .login-form {
+    max-width: 300px;
+}
+
+.login .login1 #components-form-demo-normal-login .login-form-forgot {
+    float: right;
+}
+
+.login .login1 #components-form-demo-normal-login .login-form-button {
+    width: 100%;
+    background: #00bc93;
+}
+
+.login .login1 .ant-input-affix-wrapper .ant-input:not(:first-child) {
+    padding-left: 10px;
+}
+
+.login .login1 .ant-input-affix-wrapper {
+    height: 45px;
+    width: 84%;
+    margin-left: 0px;
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+}
