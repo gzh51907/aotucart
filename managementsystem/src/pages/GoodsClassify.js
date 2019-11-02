@@ -55,7 +55,9 @@ class GoodsList extends Component {
     render() {
         return (
             <div style={{overflowY:"auto",height:"100%"}}>
+                <h2 style={{paddingLeft:"10px",color:"red"}}>商品分类</h2>
              <Table rowSelection={rowSelection} columns={columns} dataSource={data} 
+             scroll={{ x: "100%", y: 350 }}
              />
             
             </div>

@@ -6,7 +6,7 @@
 
 .header {
     width: 100%;
-    height: 15%;
+    height: 10%;
     background: rgba(32, 34, 42, 1);
     display: flex;
     align-items: center;
@@ -15,18 +15,23 @@
         color: azure;
         line-height: 100%;
         padding-left: 20px;
+        flex: 1;
+    }
+    p{
+        color: azure; 
+        margin-right: 30px; 
     }
 }
 
 .sider {
     float: left;
     background: rgba(32, 34, 42, 1);
-    height: 85%;
+    height: 90%;
     width: 18%;
 }
 .right{
     float: right;
     width: 82%;
-    height: 85%;
+    height: 90%;
     background: rgb(235, 232, 232);
 }

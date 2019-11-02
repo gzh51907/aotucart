@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Table, Button,Pagination,Icon } from 'antd';
 import ButtonGroup from 'antd/lib/button/button-group';
-
+import {get} from "../Api"
 
 const columns = [
     {
         title: 'Gid',
-        dataIndex: 'key',
+        dataIndex: '_id',
     },
     {
         title: '品牌/车型',
@@ -18,7 +18,7 @@ const columns = [
     },
     {
         title: '数量',
-        dataIndex: 'qty',
+        dataIndex: 'distance',
     },
     {
         title: '价格/天',
@@ -32,16 +32,7 @@ const columns = [
     }
 ];
 
-const data = [];
-for (let i = 0; i < 26; i++) {
-    data.push({
-        key: i,
-        brand: `日产GT-R 3.8 ${i}`,
-        plateNum: '粤A66666',
-        qty: 1+i++,
-        dayPrice:'685元/天'
-    });
-}
+
 const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
       console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
@@ -53,10 +44,26 @@ const rowSelection = {
   };
 
 class GoodsList extends Component {
+    state = {
+        data:[],
+    }
+   
+async componentDidMount(){
+  //发送请求过去所有用户信息
+   let {data:{data}} = await get('hrr/user/carlist');
+   console.log(data);
+    this.setState({
+        data
+    })
+    
+}
     render() {
+        let {data} = this.state
         return (
             <div style={{overflowY:"auto",height:"100%"}}>
+                <h2 style={{paddingLeft:"10px",color:"red"}}>订单列表</h2>
              <Table rowSelection={rowSelection} columns={columns} dataSource={data} 
+             scroll={{ x: "100%", y: 350 }}
              />
             
             </div>

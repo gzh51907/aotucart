@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { get } from '../Api'
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
 
 
 class Login extends Component {
-    state = {
-        code: ''
-    }
+    // state = {
+    //     code: ''
+    // }
     handleSubmit = e => {
         e.preventDefault();
         this.props.form.validateFields(async (err, values) => {
@@ -18,19 +17,22 @@ class Login extends Component {
                 // let {history} = this.props
                 // history.push(`/Home);
                 // 并保存用户名到本地
-                this.props.history.push("/home")
+                // this.props.history.push("/home")
                 let { username, password, remember } = values;
-                let { data: { code } } = await get('hrr/user/login', {
+                let { data:{code} } = await get('hrr/user/login', {
                     params: {
                         username,
                         password,
                     }
                 })
-                this.setState({
-                    code
 
-                })
-                // console.log(this.props);
+                if(code){
+                    let {history} = this.props
+                    localStorage.setItem("username",username);
+                    history.push('/home/');
+                }else {
+                    alert("用户名或密码不匹配")
+                }
                 
             }
 

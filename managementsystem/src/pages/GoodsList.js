@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Table, Button,Pagination,Icon } from 'antd';
 import ButtonGroup from 'antd/lib/button/button-group';
-
+import {get} from "../Api"
 
 const columns = [
     {
         title: 'Gid',
-        dataIndex: 'key',
+        dataIndex: '_id',
     },
     {
         title: '品牌/车型',
@@ -52,11 +52,29 @@ const rowSelection = {
   };
 
 class GoodsList extends Component {
+
+    state = {
+        data:[],
+    }
+   
+async componentDidMount(){
+  //发送请求过去所有用户信息
+   let {data:{data}} = await get('hrr/user/carlist');
+   console.log(data);
+    this.setState({
+        data
+    })
+    
+}
     render() {
+        let {data} = this.state
         return (
             <div style={{overflowY:"auto",height:"100%"}}>
                 <h2 style={{paddingLeft:"10px",color:"red"}}>商品列表</h2>
-             <Table rowSelection={rowSelection} columns={columns} dataSource={data} 
+             <Table rowSelection={rowSelection}
+              columns={columns} 
+              dataSource={data} 
+             scroll={{ x: "100%", y: 350 }}
              />
             
             </div>

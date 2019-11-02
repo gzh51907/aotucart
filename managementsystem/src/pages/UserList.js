@@ -1,23 +1,20 @@
 import React, { Component } from 'react';
 import { Table, Button,Pagination,Icon } from 'antd';
 import ButtonGroup from 'antd/lib/button/button-group';
-
-
+import {get} from '../Api'
+import { Item } from 'rc-menu';
 const columns = [
     {
         title: 'Uid',
-        dataIndex: 'uid',
+        dataIndex: '_id',
     },
     {
-        title: '用户名',
-        dataIndex: 'username',
+        title: '昵称',
+        dataIndex: 'username2',
     },
     {
-        title: '用户密码',
-        dataIndex: 'password',
-    },{
         title: '手机号',
-        dataIndex: 'phoneNum',
+        dataIndex: 'username',
     },
     {
         title: '注册时间',
@@ -26,20 +23,12 @@ const columns = [
     {
         title: '操作',
         dataIndex: 'button',
-        render: () => <ButtonGroup><Button icon="edit" type="primary"></Button ><Button icon="delete" type="danger" ></Button></ButtonGroup>
+        render: () => <ButtonGroup><Button icon="edit" type="primary"></Button ><Button icon="delete" type="danger" onClick={remveItem}></Button></ButtonGroup>
     }
-];
+]
 
-const data = [];
-for (let i = 0; i < 26; i++) {
-    data.push({
-        key: i,
-        uid:i,
-        username: `日产GT ${i}`,
-        password: '6666666',
-        regtime: Date.now(),
-        phoneNum:`1897777788${i}`
-    });
+function remveItem(a) {
+    console.log(a);
 }
 const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
@@ -52,12 +41,54 @@ const rowSelection = {
   };
 
 class GoodsList extends Component {
+        state = {
+            data:[],
+            columns : [
+                // {
+                //     title: 'Uid',
+                //     dataIndex: '_id',
+                // },
+                // {
+                //     title: '昵称',
+                //     dataIndex: 'username2',
+                // },
+                // {
+                //     title: '手机号',
+                //     dataIndex: 'username',
+                // },
+                // {
+                //     title: '注册时间',
+                //     dataIndex: 'regtime',
+                // },
+                {
+                    title: '操作',
+                    dataIndex: 'button',
+                    render: () => <ButtonGroup><Button icon="edit" type="primary"></Button ><Button icon="delete" type="danger" onClick={remveItem}></Button></ButtonGroup>
+                }
+            ]
+        }
+    
+       
+  async componentDidMount(){
+      //发送请求过去所有用户信息
+       let {data:{data}} = await get('hrr/user/all');
+       console.log(data);
+        this.setState({
+            data,
+            // columns:[data,...this.state.columns]
+        })
+
+        
+    }
     render() {
+        let {data} = this.state
         return (
             <div style={{overflowY:"auto",height:"100%"}}>
-             <Table rowSelection={rowSelection} columns={columns} dataSource={data} 
+                <h2 style={{paddingLeft:"10px",color:"red"}}>用户列表</h2>
+             <Table rowSelection={rowSelection} columns={columns} dataSource={data}
+             scroll={{ x: "100%", y: 350 }}  }
+
              />
-            
             </div>
         )
     }
