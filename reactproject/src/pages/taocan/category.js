@@ -58,7 +58,7 @@ class Category extends Component {
 
     //底部弹窗
     showDrawer = async (id) => {
-        let {data:{data}} = await get('./hui/goods/one',{
+        let {data:{data}} = await get('./hui/goods/taocan',{
             params:{
                 id
             }
@@ -66,7 +66,7 @@ class Category extends Component {
         let {data:{data:detail}} = await get('/goods/all',{
             params:{collection:'z_detail'}
         })
-        data = data[0]
+        // data = data[0]
         detail = detail[0]
         this.setState({
           visible: true,

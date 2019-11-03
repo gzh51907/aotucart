@@ -9,7 +9,7 @@ class Quick extends Component {
     render() {
  
         return (
-            <div id="quick">
+            <div id="quick" style={{height:"100%"}}>
                 <h2 style={{background:"#333",color:"#fff"}}>
                     <Icon type="left"></Icon>
                     套餐下单

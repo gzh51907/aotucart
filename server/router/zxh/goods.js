@@ -45,6 +45,15 @@ router.get('/one',async(req,res)=>{
     // res.send(id)
 })
 
+//根据id获取商品
+router.get('/taocan',async(req,res)=>{
+    let {id} = req.query
+    // id = Number(id)
+    let result = await find("z_taocan_total",{id:id})
+    result=result[0]
+    res.send(formatData({data:result}))
+    // res.send(id)
+})
 
 
 

@@ -5,7 +5,7 @@ import LazyLoad from 'react-lazyload';
 // axios请求
 import axios from 'axios';
 let aotu = axios.create({
-    baseURL: 'http://10.3.133.66:1907/'
+    baseURL: 'http://116.62.209.91:1907/'
 })
 class Home extends Component {
     constructor(props){
