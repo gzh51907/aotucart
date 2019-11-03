@@ -30,6 +30,8 @@ import Subscribe from "./pages/Subscribe";
 import ShareCart from "./pages/ShareCart";
 import FirstOrder from "./pages/Firstorder";
 import Quick from "./pages/Quick";
+import Test from "./pages/Test";
+import Detail from "./pages/Details";
 
 
 
@@ -54,6 +56,8 @@ class App extends Component {
             <Route path="/longrent" component={LongRent} />
             <Route path="/buffet" component={Buffet} />
             <Route path="/quick" component={Quick} />
+            <Route path="/test" component={Test} />
+            <Route path="/detail" component={Detail} />
             <Route path="/firstorder" component={FirstOrder} />>
             <Route path="/subscribe" component={Subscribe} />
             <Route path="/sharecart" component={ShareCart} />

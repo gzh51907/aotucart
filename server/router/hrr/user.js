@@ -57,8 +57,44 @@ router.get("/carlist",async(req,res)=>{
 })
 
 
+//删除商品
+router.post('/delcar',async(req,res)=>{
+    let {id} = req.body
+    let result = await remove('z_carlist',{carNo:id})
+    if(result.result.n==1){
+        res.send({msg:"删除成功",code:1})
+    }else{
+        res.send({msg:"删除失败",code:0})
+    }
+})
+
+//删除用户
+router.post('/deluser',async(req,res)=>{
+    let {username} = req.body
+    let result = await remove('y_user',{username:username})
+    if(result.result.n==1){
+        res.send({msg:"删除成功",code:1})
+    }else{
+        res.send({msg:"删除失败",code:0})
+    }
+    
+})
 
 
+//增加商品
+router.post("/addcar",async(req,res)=>{
+    let {brand,carAddr,plateNum,dayPrice} = req.body
+
+    let result = await create('z_carlist',[{brand,carAddr,plateNum,dayPrice}])
+
+    if(result.code==1){
+        res.send({code:1,msg:"插入成功"})
+    }else{
+        res.send({code:0,msg:"插入失败"})
+    }
+    
+})
+ 
 
 
 

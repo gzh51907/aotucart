@@ -1,7 +1,7 @@
 import axios from "axios";
 
 let aotu = axios.create({
-  baseURL: "http://10.3.133.66:1907/"
+  baseURL: "http://116.62.209.91:1907/"
 });
 export async function get(url = "", params = {}) {
   let data = await aotu.get(url, params);
