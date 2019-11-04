@@ -169,7 +169,7 @@ class Detail extends Component {
                     <button style={{color:"#fff",background:"#58bc58",width:"70%",margin:"0 auto",fontSize:"18px",lineHeight:"45px",
                     height:"45px"
                     }}
-                    onClick={()=>this.props.history.push('/home')}
+                    onClick={()=>this.props.history.push('/jieguo')}
                     >立即租用</button>
                 </div>
             </div>
