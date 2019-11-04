@@ -267,7 +267,7 @@ class Buffet extends Component {
                         </Row>
                         <Row style={{height:50}}></Row>
                     </div>
-                    <Row className="banner" style={{marginTop:"50px"}}><img src="../imgs/zizhubanner.jpg"/></Row>
+                    <Row className="banner" style={{marginTop:"50px"}}><img src="../img/zizhubanner.jpg"/></Row>
                     <Row className="content">
                         {
                             carlist.map((item,i)=>{
