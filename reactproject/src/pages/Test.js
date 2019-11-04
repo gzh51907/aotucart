@@ -7,11 +7,11 @@ class Test extends Component {
     }
     render() {
         return (
-            <div>
+            <div style={{height:"100%"}}>
                 <Cate history={this.props.history}></Cate>
             </div>
         )
     }
-}
+} 
 
 export default Test;
