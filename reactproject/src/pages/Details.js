@@ -39,6 +39,16 @@ class Detail extends Component {
 
     async componentDidMount(){
 
+        let user = localStorage.getItem('user')
+        if(user){
+
+        }else{
+            alert("请登录")
+            setTimeout(() => {
+                this.props.history.push('/login')
+            }, 500);
+            
+        }
 
         let carid = localStorage.getItem("carNo")
         console.log(carid)
@@ -90,7 +100,7 @@ class Detail extends Component {
                         <div className="base-info" style={{width:"100%"}}>
                             <h2 style={{fontWeight:800,fontSize:"22px"}}>{realcar.brand}<span style={{padding:"0 7px"}}>{detail.carBaseInfo.type}</span>{detail.carBaseInfo.sweptVolum}</h2>
                             <div className="price" style={{color:"red",fontSize:"16px",fontWeight:800}}>￥{realcar.dayPrice}/天</div>
-                            <div><img src={'../imgs/logo/sp1.png'} style={{maxHeight:"20px"}}/><img src={'../imgs/logo/sp2.png'} style={{maxHeight:"20px",marginLeft:"5px"}}/></div>
+                            <div><img src={'./img/sp1.png'} style={{maxHeight:"20px"}}/><img src={'./img/sp2.png'} style={{maxHeight:"20px",marginLeft:"5px"}}/></div>
                             <div style={{margin:"6px 0"}}>{detail.plateNum}  <span style={{padding:" 0 8px"}}>{detail.limitMileage} </span>      已租{detail.succTransCount}次</div>
                             <div style={{fontSize:"12px",marginTop:"8px",display:"block"}}>舒适驾驶</div>
                             <div style={{padding:"8px 0",borderBottom:"1px solid #e5e5e5",fontSize:"12px"}}>{realcar.carAddr}<span style={{float:"right",color:"#000"}}>{realcar.distanceTxt}></span></div>

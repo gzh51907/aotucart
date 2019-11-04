@@ -73,13 +73,13 @@ class Cate extends Component {
         let {brand,host,num,list} = this.state
         return (
             <div id="cate">
-                <h2><Icon type="close"></Icon>品牌与车系</h2>
+                <h2><Icon type="close" onClick={()=>this.props.history.push('/buffet')}></Icon>品牌与车系</h2>
                 <Tabs tabPosition={this.state.tabPosition}>
                     {
                         brand.map((item,i)=>{
                             return item.map((ele,idx)=>{
                                 return(
-                                    <TabPane tab={<div><img src={`../../img/logo/${ele.iconName}`} 
+                                    <TabPane tab={<div><img src={`./img/${ele.iconName}`} 
                                     style={{width:"25px",height:"25px"}}/>
                                     <span>{ele.txt}</span></div>} key={ele.txt} 
                                     style={{padding:"20px"}} forceRender={false}

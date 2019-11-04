@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Tabs, Form, Icon, Input, Button, Checkbox, notification } from 'antd';
 const { TabPane } = Tabs;
 import Api from '../Api'
-import '../css/login.css';
+import '../css/login.css'; 
 class Login extends Component {
     handleReg = e => {
         e.preventDefault();
@@ -91,8 +91,8 @@ class Login extends Component {
         return (
             <div className="login">
                 <div style={{ position: 'relative' }} className="login1">
-                    <img src="../assets/img/login.jpg" style={{ height: 255, width: '100%' }} alt="" />
-                    <h1 style={{ backgroundImage: 'url(../assets/img/logo.png)', position: 'absolute', top: -1, left: -1, width: 121, height: 59 }}></h1>
+                    <img src="./img/login.jpg" style={{ height: 255, width: '100%' }} alt="" />
+                    <h1 style={{ backgroundImage: 'url(./img/logo.png)', position: 'absolute', top: -1, left: -1, width: 121, height: 59 }}></h1>
                     <div style={{ position: 'absolute', left: 15, top: 200, paddingLeft: 15, paddingRight: 15, backgroundColor: '#fff', borderTopLeftRadius: 15, width: '90%' }}>
                         <Tabs defaultActiveKey="1" style={{ width: '100%' }} tabBarGutter={90}>
                             <TabPane tab="手机号注册" key="1" >

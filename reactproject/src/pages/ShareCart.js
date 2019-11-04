@@ -118,38 +118,7 @@ class ShareCart extends Component {
     var local = new BMap.LocalSearch(map, {
       pageCapacity: 100
     });
-    //   {
-    //   onSearchComplete: function(results) {
-    //     // 需要获取当前搜索总共有多少条结果
-    //     var totalPages = results.getNumPages();
-    //     var currPage = results.getPageIndex();
-
-    //     // if (currPage < totalPages - 1) {
-    //     //   ResultArray.push(local.getResults().Br);
-    //     //   console.log(local.getResults().Br);
-    //     //   local.gotoPage(currPage + 1); // 遍历到最后一页之后不再进行下一页搜索，此时，已经获取到全部的搜索结果，
-    //     // } else {
-    //     //   // 已经到达最后一页结果
-    //     // ResultArray.push(local.getResults());
-    //     // }
-
-    //     // handleInfiniteOnLoad = () => {
-    //     //   let data = ResultArray;
-    //     //   this.setState({
-    //     //     data,
-    //     //     loading: true
-    //     //   });
-    //     //   if (currPage > totalPages - 1) {
-    //     //     this.setState({
-    //     //       hasMore: false,
-    //     //       loading: false
-    //     //     });
-    //     //     return;
-    //     //   }
-    //     // };
-    //   }
-    // });
-    // console.log(ResultArray);
+    
     local.search(city);
     var arr = [];
     let pre = new Promise((resolve, reject) => {
@@ -170,10 +139,7 @@ class ShareCart extends Component {
 
       this.dw();
     });
-    // var time = setTimeout(() => {
-    //   clearTimeout(time);
-
-    // }, 3000);
+    
   }
 
   //
@@ -224,41 +190,6 @@ class ShareCart extends Component {
     var marker = new BMap.Marker(point, { Icon: myIcon }); // 创建标注
     map.addOverlay(marker);
 
-    // var myIcon = new BMap.Icon(
-    //   "http://7xic1p.com1.z0.glb.clouddn.com/markers.png",
-    //   new BMap.Size(23, 25)
-    // );
-    // var marker = new BMap.Marker(point, { Icon: myIcon }); // 创建标注
-    // map.addOverlay(marker);
-    // function myFun(result) {
-    //   var cityName = result.name;
-    //   map.setCenter(cityName);
-    //   console.log(result);
-    // }
-    // var myCity = new BMap.LocalCity();
-    // myCity.get(myFun);
-    // var marker = new BMap.Marker(new BMap.Point(longitude, latitude), {
-    //   icon: icon
-    // });
-
-    // var geoc = new BMap.Geocoder();
-    // map.addEventListener("click", function(e) {
-    //   var pt = e.point;
-    //   geoc.getLocation(pt, function(rs) {
-    //     var addComp = rs.addressComponents;
-    //     alert(
-    //       addComp.province +
-    //         ", " +
-    //         addComp.city +
-    //         ", " +
-    //         addComp.district +
-    //         ", " +
-    //         addComp.street +
-    //         ", " +
-    //         addComp.streetNumber
-    //     );
-    //   });
-    // });
   }
   componentDidMount() {
     this.dw();

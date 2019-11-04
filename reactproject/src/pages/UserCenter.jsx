@@ -6,51 +6,51 @@ class UserCenter extends Component {
         data: [
             {
                 title: '任务中心',
-                imgurl: '../assets/img/icon1.png'
+                imgurl: './img/icon1.png'
             },
             {
                 title: '我的订单',
-                imgurl: '../assets/img/icon2.png'
+                imgurl: './img/icon2.png'
             },
             {
                 title: '我的钱包',
-                imgurl: '../assets/img/icon3.png'
+                imgurl: './img/icon3.png'
             },
             {
                 title: '长租账单',
-                imgurl: '../assets/img/icon4.png'
+                imgurl: './img/icon4.png'
             },
             {
                 title: '我的收藏',
-                imgurl: '../assets/img/icon5.png'
+                imgurl: './img/icon5.png'
             },
             {
                 title: '身份认证',
-                imgurl: '../assets/img/icon6.png'
+                imgurl: './img/icon6.png'
             },
             {
                 title: '减免押金',
-                imgurl: '../assets/img/icon7.png'
+                imgurl: './img/icon7.png'
             },
             {
                 title: '违章专区',
-                imgurl: '../assets/img/icon8.png'
+                imgurl: './img/icon8.png'
             },
             {
                 title: '邀请有礼',
-                imgurl: '../assets/img/icon9.png'
+                imgurl: './img/icon9.png'
             },
             {
                 title: '常见问题',
-                imgurl: '../assets/img/icon10.png'
+                imgurl: './img/icon10.png'
             },
             {
                 title: '在线客服',
-                imgurl: '../assets/img/icon11.png'
+                imgurl: './img/icon11.png'
             },
             {
                 title: '设置',
-                imgurl: '../assets/img/icon12.png'
+                imgurl: './img/icon12.png'
             },
         ],
         user: '注册/登录'
@@ -88,7 +88,7 @@ class UserCenter extends Component {
                         </Tooltip>]}>
                     <List.Item.Meta
 
-                        avatar={<img src="../assets/img/head.png" style={{ width: 52, height: 52 }} />}
+                        avatar={<img src="./img/head.png" style={{ width: 52, height: 52 }} />}
                         title={<a style={{ lineHeight: 4 }}>{JSON.parse(localStorage.getItem('user')) ? JSON.parse(localStorage.getItem('user')).username : '注册/登录'}</a>}
                     />
                 </List.Item>

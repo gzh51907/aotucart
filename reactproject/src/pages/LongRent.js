@@ -43,6 +43,7 @@ class LongRent extends Component {
             <Icon
               type="left"
               style={{ paddingLeft: 20, fontSize: 16, color: "#333 " }}
+              onClick={()=>this.props.history.push('/home')}
             />
           </Header>
           <Content style={{ paddingBottom: 15 }}>
@@ -103,7 +104,7 @@ class LongRent extends Component {
                 </p>
                 <img
                   class="swipe-box-img swipe-box-img-1"
-                  src="../img/ia_100000010.png"
+                  src="./img/ia_100000010.png"
                   alt=""
                 />
               </div>
@@ -124,7 +125,7 @@ class LongRent extends Component {
                 </p>
                 <img
                   class="swipe-box-img swipe-box-img-1"
-                  src="../img/ia_100000012.png"
+                  src="./img/ia_100000012.png"
                   alt=""
                 />
               </div>
@@ -144,7 +145,7 @@ class LongRent extends Component {
                 </p>
                 <img
                   class="swipe-box-img swipe-box-img-1"
-                  src="../img/ia_100000013.png"
+                  src="./img/ia_100000013.png"
                   alt=""
                 />
               </div>
@@ -164,7 +165,7 @@ class LongRent extends Component {
                 </p>
                 <img
                   class="swipe-box-img swipe-box-img-1"
-                  src="../img/ia_100000013.png"
+                  src="./img/ia_100000013.png"
                   alt=""
                 />
               </div>
@@ -184,7 +185,7 @@ class LongRent extends Component {
                 </p>
                 <img
                   class="swipe-box-img swipe-box-img-1"
-                  src="../img/ia_100000014.png"
+                  src="./img/ia_100000014.png"
                   alt=""
                 />
               </div>

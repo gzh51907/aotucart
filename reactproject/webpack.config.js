@@ -5,22 +5,13 @@ module.exports = {
   entry: "./src/main.js",
   output: {
     path: path.join(__dirname, "./dist"),
-    filename: "js/bundle-[name]-[hash:5].js"
+    filename:"[name].[chunkhash:8].js"//对js添加hash指纹
   },
   devServer: {
     contentBase: path.join(__dirname, "./src")
     // open:true
   },
 
-  // resolve:{
-  //     alias:{
-  //         // 'vue$':'vue/dist/vue.js', //解决Vue单文件组件不能使用template的问题
-  //         '@':path.resolve('src'),
-  //         '@@':path.resolve('src/components'),
-  //         '~':path.resolve('src/pages'),
-  //     },
-  //     extensions:['.js', '.jsx']
-  // },
 
   // 加载器
   module: {
@@ -46,10 +37,12 @@ module.exports = {
         include: path.resolve(__dirname, "./src")
       },
       {
-        test: /\.(png|jpg|gif|svg)$/,
-        loader: "file-loader",
+        test: /\.(ico|png|jpg|gif|svg)$/,
+        loader: "url-loader",
         options: {
-          include: "./src/img/[name].[ext]?[hash]" //../img是文件存储位置，name是文件名
+          // include: "./src/img/[name].[ext]?[hash]", //../img是文件存储位置，name是文件名
+          limit: 10000,
+          name:'img/[name].[hash:8].[ext]'
         }
       },
 

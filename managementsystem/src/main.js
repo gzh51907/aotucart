@@ -1,15 +1,15 @@
 import React from 'react';
 import {render} from 'react-dom';
-import {HashRouter,Route} from 'react-router-dom';
+import {HashRouter,Route,BrowserRouter} from 'react-router-dom';
 import App from './App.js';
 
 
 // let MyContext = React.createContext()
 
 render(
-    <HashRouter>
+    <BrowserRouter>
         <App/>
         {/* <Route component={App}/> */}
-    </HashRouter>,
+    </BrowserRouter>,
     document.querySelector('#app')
 )

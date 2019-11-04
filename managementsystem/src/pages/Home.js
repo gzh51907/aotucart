@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import { Menu, Icon } from 'antd';
+import { Menu, Icon,Button } from 'antd';
 import {Route,Switch,Redirect} from 'react-router-dom';
 const { SubMenu } = Menu;
 import './Home.scss';
@@ -9,6 +9,7 @@ import GoodsClassify from './GoodsClassify'
 import AddUser from './AddUser'
 import OrderList from './OrderList'
 import UserList from './UserList'
+
 class Home extends Component{
     state = {
        theme:{theme: 'dark',
@@ -55,7 +56,10 @@ class Home extends Component{
       goto = ({key})=>{
         this.props.history.push(key);
       }
-    
+    logout = ()=>{
+        this.props.history.push("/");
+        localStorage.clear("username");
+    }
     //   changeTheme = value => {
     //     this.setState({
     //       theme: value ? 'dark' : 'light',
@@ -68,15 +72,19 @@ class Home extends Component{
     //       current: e.key,
     //     });
     //   };
+
     render(){
         let {theme} = this.state;
         let {menu1} = this.state;
         let {path,url} = this.props.match;
-        
+        let user = localStorage.getItem("username");
+        console.log(user);
         return (
             <div className="home">
               <div className="header">
                   <h2>凹凸租车后台管理系统</h2>
+                  <p>管理员：{user} <Button icon="logout" size="small" type="primary"
+                  onClick={this.logout}></Button></p>
               </div>
               <div className="sider">
         <Menu

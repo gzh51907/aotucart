@@ -47,10 +47,10 @@ class CartOwner extends Component {
         return (
             <div style={{ position: 'relative' }}>
                 <div style={{ position: "relative" }}>
-                    <img src="../assets/img/carowner.jpg" style={{ width: '100%' }} alt="" />
+                    <img src="./img/carowner.jpg" style={{ width: '100%' }} alt="" />
                 </div>
-                <div style={{ position: 'absolute', top: 0, left: -1 }}><img src="../assets/img/carowner.png" style={{ width: '100%' }} alt="" /></div>
-                <div style={{ marginBottom: 60 }}><img src="../assets/img/carowner1.png" style={{ width: '100%' }} alt="" /></div>
+                <div style={{ position: 'absolute', top: 0, left: -1 }}><img src="./img/carowner.png" style={{ width: '100%' }} alt="" /></div>
+                <div style={{ marginBottom: 60 }}><img src="./img/carowner1.png" style={{ width: '100%' }} alt="" /></div>
                 <Button type="primary" block style={{ height: 65, position: 'fixed', bottom: 0, left: 0, zIndex: 111, border: 'none', backgroundImage: 'linear-gradient(90deg,#0ab882,#43d96e)', fontSize: 17, fontWeight: 700 }} onClick={this.showDrawer}>点击加入凹凸车主</Button>
                 <Drawer
                     title={<div><Icon type="close" onClick={this.closeBtn} style={{ fontSize: 18 }} /> <h2>成为车主</h2></div>}
