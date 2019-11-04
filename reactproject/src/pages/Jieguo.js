@@ -4,6 +4,7 @@ import { Result, Button  } from 'antd';
 class Jieguo extends Component {
 
     componentDidMount(){
+        localStorage.removeItem("carNo")
         setTimeout(() => {
             this.props.history.push('/home')
         }, 5000);

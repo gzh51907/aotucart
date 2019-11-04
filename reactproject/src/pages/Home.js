@@ -67,6 +67,7 @@ class Home extends Component {
     goToXingqing = (carNo)=>{
         console.log(carNo);
         localStorage.setItem('carNo',carNo)
+        this.props.history.push('/detail')
     }
     render() {
         let { quickList, bannerList, quickList1, modelList, modelList1 ,show} = this.state;
@@ -159,7 +160,7 @@ class Home extends Component {
                 <div className='car-list'>
                     {
                         modelList.map(item => {
-                            return <div><Row type="flex" style={{ marginBottom: 20 }}>
+                            return <div><Row type="flex" style={{ marginBottom: 20 }} key={item.title}>
                                 <Col span={18} order={1} style={{ textAlign: 'left' }}>
                                     <h1 style={{ fontSize: 20 }}>{item.title}</h1>
                                 </Col>
@@ -172,7 +173,7 @@ class Home extends Component {
                             </Row>
                                 <Row gutter={10}>
                                     {item.carList.map(it => {
-                                        return <Col span={12} style={{ minHeight: 212 }}>
+                                        return <Col span={12} style={{ minHeight: 212 }} key={it.carNo}>
                                             <LazyLoad>
                                                <img src={"https://carphoto.aotuzuche.com/" + it.picPath} onClick={this.goToXingqing.bind(this,it.carNo)} alt="" style={{ height: 107.5, width: 162.5 }} /> 
                                             </LazyLoad>
@@ -191,8 +192,8 @@ class Home extends Component {
                     }
                     {
                         modelList1.map(item => {
-                            return <div>
-                                <Row type="flex" style={{ marginBottom: 20 }}>
+                            return <div key={item.title}>
+                                <Row type="flex" style={{ marginBottom: 20 }} >
                                     <Col span={18} order={1} style={{ textAlign: 'left' }}>
                                         <h1 style={{ fontSize: 20 }}>{item.title}</h1>
                                     </Col>
@@ -206,7 +207,7 @@ class Home extends Component {
                                 <ul >
                                     {
                                         item.carTypeList.map(it => {
-                                            return <li>
+                                            return <li key={it.carNo}>
                                                 <LazyLoad><img src={"https://carphoto.aotuzuche.com/" + it.picPath} onClick={this.goToXingqing.bind(this,it.carNo)} alt="" style={{ height: 107.5, width: 162.5 }} /></LazyLoad>
                                                 
                                                 <h3 style={{ fontSize: 16, color: '#333' }}>{it.brandInfo} {it.sweptVolum}</h3>
