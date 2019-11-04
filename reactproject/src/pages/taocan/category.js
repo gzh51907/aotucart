@@ -134,11 +134,7 @@ class Category extends Component {
                     }
   
                 </Tabs>
-                <div style={{ marginTop: 16 }}>
-                <Button type="primary" onClick={this.showDrawer}>
-                    Open
-                </Button>
-                </div>
+                
                 <Drawer
                 title={<div><h5 style={{fontSize:"18px",fontWeight:800}}>{dt.name}</h5><h6>{dt.plateNumType}</h6></div>}
                 placement="bottom"
@@ -186,8 +182,8 @@ class Category extends Component {
                         </Row>
                     </div>
                     <div className="button-group" style={{textAlign:"center"}}>
-                        <Button onClick={this.onClose}>取消</Button>
-                        <Button type="primary">提交</Button>
+                        <Button>取消</Button>
+                        <Button type="primary" onClick={()=>this.props.history.push('/home')}>提交</Button>
                         
                     </div>
                 </Drawer>

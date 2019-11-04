@@ -32,6 +32,7 @@ import FirstOrder from "./pages/Firstorder";
 import Quick from "./pages/Quick";
 import Test from "./pages/Test";
 import Detail from "./pages/Details";
+import Jieguo from "./pages/Jieguo";
 
 
 
@@ -61,8 +62,10 @@ class App extends Component {
             <Route path="/firstorder" component={FirstOrder} />>
             <Route path="/subscribe" component={Subscribe} />
             <Route path="/sharecart" component={ShareCart} />
+            <Route path="/jieguo" component={Jieguo} />
             <Redirect from="/" to="/home" exact />
             <Route render={() => <div> <h1> 404 </h1>页面不存在</div>} />
+
         </Switch>   
 
         </div>

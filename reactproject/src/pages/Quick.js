@@ -10,7 +10,7 @@ class Quick extends Component {
  
         return (
             <div id="quick" style={{height:"100%"}}>
-                <h2 style={{background:"#333",color:"#fff"}}>
+                <h2 style={{background:"#333",color:"#fff"}} onClick={()=>this.props.history.push('/home')}>
                     <Icon type="left"></Icon>
                     套餐下单
                 </h2>
